@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html>
   <head>
+      <!-- External JS -->
+    <script type="text/javascript" src="/vendor/jquery-2.2.3.min.js"></script>
     <style>
       #map {
-        width: 100%;
+        width: 70%;
         height: 400px;
         background-color: grey;
       }
@@ -12,17 +14,62 @@
   <body>
     <h3>Map App Demo</h3>
     <!--The div element for the map -->
+    <form action="">
+        <input type="text">
+        <button type="submit" ></button>
+    </form>
     <div id="map"></div>
     <script>
     // Initialize and add the map
+
+
+
+
 function initMap() {
   // The location of Uluru
-  var uluru = {lat: 51.0486, lng: -114.0708};
+  var uluru = {lat: 51.0356, lng: -114.0708};
+  var uluru1 = {lat: 51.0456, lng: -114.0608};
+  var uluru2 = {lat: 51.0476, lng: -114.0508};
+  var uluru3 = {lat: 51.0446, lng: -114.0408};
+  var uluru4 = {lat: 51.0356, lng: -114.0508};
+  var uluru5 = {lat: 51.0456, lng: -114.0208};
+  var uluru6 = {lat: 51.0476, lng: -114.0308};
+  var uluru7 = {lat: 51.0446, lng: -114.0608};
+
   // The map, centered at Uluru
   var map = new google.maps.Map(
-      document.getElementById('map'), {zoom: 5, center: uluru});
+      document.getElementById('map'), {zoom: 12, center: uluru});
   // The marker, positioned at Uluru
-  var marker = new google.maps.Marker({position: uluru, map: map});
+  map.addListener('tap', addMarker);
+  function addMarker(event){
+  var marker = new google.maps.Marker({position: event.latLng, 
+    map: map, 
+    icon:"https://img.icons8.com/doodle/30/000000/filled-flag.png",
+    title: 'Hello World!',animation: google.maps.Animation.DROP})
+  }
+  
+  function toggleBounce() {
+  if (marker.getAnimation() !== null) {
+    marker.setAnimation(null);
+  } else {
+    marker.setAnimation(google.maps.Animation.BOUNCE);
+  }
+}
+  addMarker(uluru);
+  addMarker(uluru1);
+  addMarker(uluru2);
+  addMarker(uluru3);
+  addMarker(uluru4);
+  addMarker(uluru5);
+  addMarker(uluru6);
+  addMarker(uluru7);
+}
+function addLatLng(event) {
+  var marker = new google.maps.Marker({
+    position: event.latLng,
+    title: '#' + path.getLength(),
+    map: map
+  });
 }
     </script>
     <script async defer
