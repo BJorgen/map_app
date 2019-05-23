@@ -106,6 +106,17 @@ const testCases = {
         });
     });
   }),
+
+  test_POST_favorite : describe("POST /maps/:map/favorite -> delete point", function() {
+    it('should return Error 400', function(done) {
+      chai.request(server)
+        .post('/maps/rmap/favorite')
+        .end(function(err, res){
+          res.should.have.status(400);
+          done();
+        });
+    });
+  }),
 // Session route 
   test_GET_sessionNEW : describe('GET "/session/new" - loginpage', function() {
     it('should return 200 OK', function(done) {
