@@ -17,11 +17,15 @@ const post = function (req, res){
   }
 };
 
+const deleteSession = function (req, res){
+  res.status(200).send();
+};
 
 module.exports = function(DataHelpers) {
 
   sessionsRoutes.get("/new", get_new);
   sessionsRoutes.post("/", post);
+  sessionsRoutes.delete("/", deleteSession);
 
 
   return sessionsRoutes;
