@@ -16,8 +16,11 @@ const helloWorld = express.Router().get("/", function(req, res) {
 
 app.use('/', helloWorld);
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
 
   console.log("Example app listening on port " + PORT);
 
 });
+
+// it is used by Mocha
+module.exports = server;
