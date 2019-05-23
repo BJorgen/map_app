@@ -173,7 +173,18 @@ test_GET_user_profile : describe("GET /users/:user -> view own profile", functio
           done();
         });
     });
-  })
+  }),
+
+  test_DELETE_sessions : describe('DELETE "/session" - onlogout', function() {
+    it('should return 200 OK', function(done) {
+      chai.request(server)
+        .delete('/sessions')
+        .end(function(err, res){
+          res.should.have.status(200);
+          done();
+        });
+    });
+  }),
 
 
 }
