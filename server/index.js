@@ -15,12 +15,7 @@ app.use(express.static("public"));
 const helloWorld = express.Router().get("/", function(req, res) {
     res.render("login");
   });
-
-
-const DataHelpers = null //require("./lib/data-helpers.js")(db, ObjectID);
-
-const sessionsRoutes = require("./routes/sessions")(DataHelpers);
-
+const sessionsRoutes = require("./routes/sessions");
 app.use('/', helloWorld);
 app.use("/sessions", sessionsRoutes);
 
