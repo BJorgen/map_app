@@ -95,6 +95,17 @@ const testCases = {
         });
     });
   }),
+
+  test_DELETE_point : describe("DELETE /maps/rmap/points/:point -> delete point", function() {
+    it('should return Error 400', function(done) {
+      chai.request(server)
+        .delete('/maps/rmap/points/rpoint')
+        .end(function(err, res){
+          res.should.have.status(400);
+          done();
+        });
+    });
+  }),
 // Session route 
   test_GET_sessionNEW : describe('GET "/session/new" - loginpage', function() {
     it('should return 200 OK', function(done) {
