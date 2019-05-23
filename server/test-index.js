@@ -19,6 +19,16 @@ const testCases = {
     });
   }),
 
+  test_GET_maps_Imap : describe("GET '/maps:map' - view a map", function() {
+    it('should return Error 400', function(done) {
+      chai.request(server)
+        .get('/maps')
+        .end(function(err, res){
+          res.should.have.status(400);
+          done();
+        });
+    });
+  }),
 // Session route 
   test_GET_sessionNEW : describe('GET "/session/new" - loginpage', function() {
     it('should return 200 OK', function(done) {
