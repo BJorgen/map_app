@@ -1,9 +1,4 @@
-#map{
-    width: 100%;
-    height: 300px;
-    background-color: grey;
-   
-    }
+
 .header{
     text-align: center;
     margin: auto;
@@ -22,21 +17,11 @@
     font-family: monospace;
     font-size: 48px
 }
-body{
-    background-color: aliceblue;
-}
+
 .logoRight{
     float: right;
 }
 .logo{
     float: left;
 }
-.logo3{
-    float: right;
-}
-    
-.box{
-    
-   
 
-}
