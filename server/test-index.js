@@ -22,7 +22,7 @@ const testCases = {
   test_GET_maps_Imap : describe("GET '/maps:map' - view a map", function() {
     it('should return Error 400', function(done) {
       chai.request(server)
-        .get('/maps')
+        .get('/maps/randomString')
         .end(function(err, res){
           res.should.have.status(400);
           done();
