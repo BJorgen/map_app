@@ -42,9 +42,20 @@ const testCases = {
   }),
 
   test_POST_maps : describe("creating a new map", function() {
-    it('should return 200 OK', function(done) {
+    it('should return Error 400', function(done) {
       chai.request(server)
         .post('/maps')
+        .end(function(err, res){
+          res.should.have.status(400);
+          done();
+        });
+    });
+  }),
+
+  test_POST_point : describe("POST /maps/rmap/points", function() {
+    it('should return Error 400', function(done) {
+      chai.request(server)
+        .post('/maps/rmap/points')
         .end(function(err, res){
           res.should.have.status(400);
           done();
