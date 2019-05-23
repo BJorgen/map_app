@@ -21,6 +21,7 @@
   "homepage": "https://github.com/BJorgen/map_app#readme",
   "dependencies": {
     "body-parser": "^1.19.0",
+    "dotenv": "^8.0.0",
     "ejs": "^2.6.1",
     "express": "^4.17.0",
     "knex": "^0.16.5",
