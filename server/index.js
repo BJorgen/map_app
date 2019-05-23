@@ -12,8 +12,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 const sessionsRoutes = require("./routes/sessions");
+const mapsRoutes = require("./routes/maps");
 app.use("/sessions", sessionsRoutes);
-
+app.use("/maps", mapsRoutes);
 const server = app.listen(PORT, () => {
 
   console.log("Example app listening on port " + PORT);
