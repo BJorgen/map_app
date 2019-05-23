@@ -44,6 +44,10 @@ const createFavorite = function (req, res){
   res.status(400).send();
 };
 
+const deleteFavorite = function (req, res){
+  res.status(400).send();
+};
+
 module.exports = function(DataHelpers) {
   mapsRoutes.get("/", get);
   mapsRoutes.get("/:map", getMap);
@@ -55,6 +59,7 @@ module.exports = function(DataHelpers) {
   mapsRoutes.delete("/:map/points/:point/imgs/:img", deleteImg);
   mapsRoutes.delete("/:map/points/:point", deletePoint);
   mapsRoutes.post("/:map/favorite", createFavorite);
+  mapsRoutes.delete("/:map/favorite", deleteFavorite);
 
   return mapsRoutes;
 }();
