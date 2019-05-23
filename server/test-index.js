@@ -33,7 +33,7 @@ const testCases = {
   test_GET_maps_Imap_points_Ipoint : describe("GET '/maps:map/points/:point' - view a map", function() {
     it('should return Error 400 if no valied map and point provided', function(done) {
       chai.request(server)
-        .get('/maps:rmap/points/:rpoint')
+        .get('/maps/:rmap/points/:rpoint')
         .end(function(err, res){
           res.should.have.status(400);
           done();
