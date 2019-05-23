@@ -7,7 +7,18 @@ chai.use(chaiHttp);
 const expect = chai.expect;
 
 const testCases = {
-  
+// Maps routes
+  test_GET_maps : describe("GET '/maps' - mainpage", function() {
+    it('should return 200 OK', function(done) {
+      chai.request(server)
+        .get('/maps')
+        .end(function(err, res){
+          res.should.have.status(200);
+          done();
+        });
+    });
+  }),
+
 // Session route 
   test_GET_sessionNEW : describe('GET "/session/new" - loginpage', function() {
     it('should return 200 OK', function(done) {
