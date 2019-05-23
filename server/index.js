@@ -11,12 +11,7 @@ app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-//TODO test pourpose, delete it
-const helloWorld = express.Router().get("/", function(req, res) {
-    res.render("login");
-  });
 const sessionsRoutes = require("./routes/sessions");
-app.use('/', helloWorld);
 app.use("/sessions", sessionsRoutes);
 
 const server = app.listen(PORT, () => {
