@@ -40,6 +40,18 @@ const testCases = {
         });
     });
   }),
+
+  test_POST_maps : describe("creating a new map", function() {
+    it('should return 200 OK', function(done) {
+      chai.request(server)
+        .post('/maps')
+        .end(function(err, res){
+          res.should.have.status(400);
+          done();
+        });
+    });
+  }),
+
 // Session route 
   test_GET_sessionNEW : describe('GET "/session/new" - loginpage', function() {
     it('should return 200 OK', function(done) {
