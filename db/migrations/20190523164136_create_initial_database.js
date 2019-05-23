@@ -38,7 +38,7 @@ exports.up = function(knex, Promise) {
   })
   .createTable('images', function (table) {
     table.increments('id').primary()
-    table.binary('image')
+    table.string('image_url', 255)
     table.integer('point_id')
     table.foreign('point_id').references('points.id')
   })
@@ -64,11 +64,11 @@ exports.up = function(knex, Promise) {
 
 exports.down = function(knex, Promise) {
   return knex.schema
-  .dropTable('users')
-  .dropTable('map_settings')
-  .dropTable('maps')
-  .dropTable('points')
-  .dropTable('images')
-  .dropTable('favorites')
   .dropTable('contributors')
+  .dropTable('favourites')
+  .dropTable('images')
+  .dropTable('points')
+  .dropTable('maps')
+  .dropTable('map_settings')
+  .dropTable('users')
 };
