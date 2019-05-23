@@ -63,6 +63,17 @@ const testCases = {
     });
   }),
 
+  test_PUT_point : describe("POST /maps/rmap/points/:point -> update", function() {
+    it('should return Error 400', function(done) {
+      chai.request(server)
+        .post('/maps/rmap/points/rpoint')
+        .end(function(err, res){
+          res.should.have.status(400);
+          done();
+        });
+    });
+  }),
+
 // Session route 
   test_GET_sessionNEW : describe('GET "/session/new" - loginpage', function() {
     it('should return 200 OK', function(done) {
