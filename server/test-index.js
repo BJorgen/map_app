@@ -107,7 +107,7 @@ const testCases = {
     });
   }),
 
-  test_POST_favorite : describe("POST /maps/:map/favorite -> delete point", function() {
+  test_POST_favorite : describe("POST /maps/:map/favorite -> add favorite", function() {
     it('should return Error 400', function(done) {
       chai.request(server)
         .post('/maps/rmap/favorite')
@@ -118,7 +118,7 @@ const testCases = {
     });
   }),
 
-  test_DELETE_favorite : describe("DELETE /maps/:map/favorite -> delete point", function() {
+  test_DELETE_favorite : describe("DELETE /maps/:map/favorite -> delete favorite", function() {
     it('should return Error 400', function(done) {
       chai.request(server)
         .delete('/maps/rmap/favorite')
@@ -128,6 +128,20 @@ const testCases = {
         });
     });
   }),
+
+// User route
+
+test_GET_user_profile : describe("GET /users/:user -> view own profile", function() {
+  it('should return Error 400', function(done) {
+    chai.request(server)
+      .get('/users/ruser')
+      .end(function(err, res){
+        res.should.have.status(400);
+        done();
+      });
+  });
+}),
+
 // Session route 
   test_GET_sessionNEW : describe('GET "/session/new" - loginpage', function() {
     it('should return 200 OK', function(done) {
