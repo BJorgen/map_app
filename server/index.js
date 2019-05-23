@@ -13,8 +13,11 @@ app.use(express.static("public"));
 
 const sessionsRoutes = require("./routes/sessions");
 const mapsRoutes = require("./routes/maps");
+const usersRoutes = require("./routes/users");
 app.use("/sessions", sessionsRoutes);
 app.use("/maps", mapsRoutes);
+app.use("/users", usersRoutes);
+
 const server = app.listen(PORT, () => {
 
   console.log("Example app listening on port " + PORT);
