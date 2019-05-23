@@ -36,6 +36,10 @@ const deleteImg = function (req, res){
   res.status(400).send();
 };
 
+const deletePoint = function (req, res){
+  res.status(400).send();
+};
+
 module.exports = function(DataHelpers) {
   mapsRoutes.get("/", get);
   mapsRoutes.get("/:map", getMap);
@@ -45,6 +49,7 @@ module.exports = function(DataHelpers) {
   mapsRoutes.post("/:map/points/:point", updatePoint);
   mapsRoutes.post("/:map/points/:point/imgs", uploadImg);
   mapsRoutes.delete("/:map/points/:point/imgs/:img", deleteImg);
+  mapsRoutes.delete("/:map/points/:point", deletePoint);
 
   return mapsRoutes;
 }();
