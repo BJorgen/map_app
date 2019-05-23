@@ -19,11 +19,17 @@ const getPoint = function (req, res){
 const createMap = function (req, res){
   res.status(400).send();
 };
+
+const createPoint = function (req, res){
+  res.status(400).send();
+};
+
 module.exports = function(DataHelpers) {
   mapsRoutes.get("/", get);
   mapsRoutes.get("/:map", getMap);
   mapsRoutes.get("/:map/points/:point", getPoint);
   mapsRoutes.post("/", createMap);
+  mapsRoutes.post("/:map/points", createPoint);
 
   return mapsRoutes;
 }();
