@@ -6,12 +6,14 @@ const bodyParser    = require("body-parser");
 const morgan        = require("morgan");
 const app           = express();
 
+app.set("view engine", "ejs");
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
+//TODO test pourpose, delete it
 const helloWorld = express.Router().get("/", function(req, res) {
-    res.send("<h1>Hello World</h1>");
+    res.render("login");
   });
 
 app.use('/', helloWorld);
