@@ -16,7 +16,13 @@ const helloWorld = express.Router().get("/", function(req, res) {
     res.render("login");
   });
 
+
+const DataHelpers = null //require("./lib/data-helpers.js")(db, ObjectID);
+
+const sessionsRoutes = require("./routes/sessions")(DataHelpers);
+
 app.use('/', helloWorld);
+app.use("/sessions", sessionsRoutes);
 
 const server = app.listen(PORT, () => {
 
