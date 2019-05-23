@@ -6,7 +6,7 @@ var should = chai.should();
 chai.use(chaiHttp);
 
 
-describe('Get hello world', function() {
+const test_server = describe('Get hello world', function() {
     it('should list ALL blobs on /blobs GET', function(done) {
         chai.request(server)
           .get('/')
@@ -24,3 +24,5 @@ describe('Get hello world', function() {
           });
       });
 });
+
+module.exports = test_server;
