@@ -29,6 +29,17 @@ const testCases = {
         });
     });
   }),
+
+  test_GET_maps_Imap : describe("GET '/maps:map/points/:point' - view a map", function() {
+    it('should return Error 400 if no valied map and point provided', function(done) {
+      chai.request(server)
+        .get('/maps:rmap/points/:rpoint')
+        .end(function(err, res){
+          res.should.have.status(400);
+          done();
+        });
+    });
+  }),
 // Session route 
   test_GET_sessionNEW : describe('GET "/session/new" - loginpage', function() {
     it('should return 200 OK', function(done) {
