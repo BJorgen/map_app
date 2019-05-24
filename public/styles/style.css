@@ -41,4 +41,7 @@ body{
 .logo3{
     float: right;
 }
-    
+
+.datacontainer{
+    display: none;
+}
