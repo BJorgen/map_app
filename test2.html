@@ -4,6 +4,7 @@
     
     <!-- App CSS -->
     <link rel="stylesheet" href="public/styles/style.css" type="text/css" />
+    <link rel="stylesheet" href="public/styles/mainbox.css" type="text/css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
   <body>
@@ -16,7 +17,31 @@
           <button type='button' class="button3 btn btn-outline-dark">browse</button>
     <!--The div element for the map -->
     
-    <div id="map"></div>
+    <div class="container">
+      <div class="row-container row">
+          <div class=" col-7">
+              <div id="map">
+                  <img class="" width="70px" height="70px"src="https://cdn2.iconfinder.com/data/icons/scenarium-vol-5/128/016_map_location_travel_navigation_city_street_road-512.png">
+               </div>
+          </div>
+
+        <div class=" col-5">
+            <div class="box">
+              <h3>More info:</h3>
+              <button type='button' class="b1 btn btn-outline-dark">edit</button>
+              <button type='button' class="b2 btn btn-outline-dark">delete</button>
+              
+            </div>
+      </div>
+    </div>
+    <!-- <footer id="footer">
+        <img class="logo" width="70px" height="70px"src="https://cdn2.iconfinder.com/data/icons/scenarium-vol-5/128/016_map_location_travel_navigation_city_street_road-512.png">
+        <img class="logoRight" width="70px" height="70px"src="https://cdn2.iconfinder.com/data/icons/scenarium-vol-5/128/016_map_location_travel_navigation_city_street_road-512.png">
+        
+        </footer> -->
+
+
+   
     <script>
     
     var map;
@@ -27,7 +52,6 @@ function initMap() {
     center: {lat: 51.0879, lng: -114.0524} 
   });
   
-
   poly = new google.maps.Polyline({
     
   });
@@ -54,7 +78,7 @@ function addLatLng(event) {
   });
 //   marker.addListener('click')
 var infowindow = new google.maps.InfoWindow({
-    content: "<div style='float:left'><img src=https://cdn2.iconfinder.com/data/icons/scenarium-vol-4/128/048_fast_food_soda_burger_chicken_wings_movie_theater-48.png></div><div style='float:right; padding: 10px;'><b>Burger King</b><br/>King of burgers<br/> </div>"
+    content: "<div style='float:left'><img src=https://cdn2.iconfinder.com/data/icons/scenarium-vol-4/128/048_fast_food_soda_burger_chicken_wings_movie_theater-.png></div><div style='float:right; padding: 10px;'><b>Burger King</b><br/>King of burgers<br/> </div>"
   });
   marker.addListener('click', function() {
     infowindow.open(map, marker,toggleBounce);
@@ -74,10 +98,8 @@ var infowindow = new google.maps.InfoWindow({
 }
     </script>
     <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGX4T5LFPiQQTFQk9CWQdHONYfbmbV--I&callback=initMap">
-    
-    
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGX4T5LFPiQQTFQk9CWQdHONYfbmbV--I&callback=initMap"></script>
     </script>
-  </body>
+   
 </html>
 
