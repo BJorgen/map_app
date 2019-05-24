@@ -3,9 +3,14 @@
 const express       = require('express');
 const mapsRoutes  = express.Router();
 
+const getMaps = require('./../util/mapObject');
+
 
 const get = function (req, res){
-  res.render('main');
+  const templateVars = {
+    map: getMaps
+  };
+  res.render('main', templateVars);
 };
 
 const getMap = function (req, res){
