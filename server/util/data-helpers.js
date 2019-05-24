@@ -12,77 +12,70 @@ const knex = require('knex')({
     }
 });
 
+const map_helpers = require('./data-helpers-maps')(knex);
+const user_helpers = require('./data-helpers-maps')(knex);
 
-function getMapSettings(mapSettingId, cb) {
-  knex.select('*').from('map_settings')
-    .where('id', mapSettingId)
-    .asCallback(function(err, mapSettings) {
-      if (err) {
-        throw err;
-      }
-      cb(null,mapSettings[0]);
-      });
-}
-
-function getMap(mapId, cb) {
- let map;
-  knex.select('*').from('maps')
-    .where('id', mapId)
-    .asCallback(function(err, mapData) {
-      if (err) {
-        throw err;
-      }
-      map = mapData[0];
-      console.log(map.map_setting_id)
-      getMapSettings(map.map_setting_id , function(err, res) {
-        if (err) {
-          throw err;
-        }
-        map.settings = res;
-        cb(map)
-      });
-    });
-}
+//==============================================
+//            Test User Fuctionality
+//==============================================
 
 
-function getPointImages(pointId, cb) {
-  knex.select('*').from('images')
-  .where('point_id', pointId)
-  .asCallback(function(err, pointImages) {
-    if (err) {
-      throw err;
-    }
-    cb(pointImages)
-  });
-}
+// ser_helpers.getUserById(1, console.log)
+// ser_helpers.getUserByUsername('Gaga', console.log)
+// ser_helpers.getUserByEmail('bri@gmail.com', console.log)
+// ser_helpers.getAllUsers(console.log)
 
 
-function getMapPoints(mapId, cb) {
-  knex.select('*',{ image_id: 'images.id' }).from('points')
-    .innerJoin('images','points.id','images.point_id')
-    .where('map_id', mapId)
-    .asCallback(function(err, mapPoints) {
-      if (err) {
-        throw err;
-      }
-      points = mapPoints;
-      cb(mapPoints)
-    });
-}
+// //----- Example User to Input ------
+// userData = {
+//   first_name: 'Bo',
+//   last_name: 'Bolast',
+//   email_address: 'bo@gmail.com',
+//   username: 'Bobo',
+//   password: '123'
+// }
 
-function getMapLikes() {
-
-}
+// user_helpers.addUser(userData, console.log)
 
 
-function getMapContributors() {
-  
-}
+//==============================================
+//            Test Map Fuctionality
+//==============================================
 
 
+//map_helpers.getMap(3, console.log);
+//map_helpers.getMapPoints(1, console.log)
+//map_helpers.getPointImages(3, console.log)
 
-// --------- Test Function Calls -----
 
-//getMap(3, console.log);
-//getMapPoints(3, console.log)
-//getPointImages(3, console.log)
+// //----- Example Map to Input ------
+
+// const mapData = {
+//     map: {
+//       name: 'Eating out During Bootcamp',
+//       public: true,
+//       user_id: 1
+//     },
+//     settings: {
+//       center_long: -114.0666796,
+//       center_lat: 51.0442381,
+//       zoom: 16.5
+//     }
+//   }
+
+// map_helpers.addMap(mapData, console.log)
+
+// map_helpers.getAllMaps(console.log)
+
+//map_helpers.getPointById(1,console.log)
+
+// const pointData = {
+//     title: 'New Point',
+//     description: 'Fun Place',
+//     longitude: '-114.058937',
+//     latitude: '51.046669',
+//     map_id: 1
+// }
+
+// map_helpers.addPoint(pointData, console.log)
+
