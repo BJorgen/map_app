@@ -18,7 +18,7 @@ const getMap = function (req, res){
 };
 
 const getPoint = function (req, res){
-  res.status(400).send();
+  res.status(200).json(getMaps.points);
 };
 
 const createMap = function (req, res){
