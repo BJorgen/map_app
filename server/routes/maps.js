@@ -35,9 +35,7 @@ const createMap = function (req, res){
   res.status(400).send();
 };
 
-const createPoint = function (req, res){
-  res.status(400).send();
-};
+
 
 const updatePoint = function (req, res){
   res.status(400).send();
@@ -82,7 +80,29 @@ module.exports = function(_DataHelpers) {
   mapsRoutes.get("/:map/points", getPoints);
   mapsRoutes.get("/:map/points/:point", getPoint);
   mapsRoutes.post("/", createMap);
-  mapsRoutes.post("/:map/points", createPoint);
+  mapsRoutes.post("/:map/points", function (req, res){
+    const params = {      
+      description : req.body.description,
+      latitude : req.body.latitude,
+      longitude : req.body.longitude,
+      map_id : req.params.map,
+      title : req.body.title
+    }
+    if(!params.title || ! params.latitude || ! params.longitude || ! params.map_id){
+      res.status(403).send();
+    }
+    else{
+      console.log("params to db", params);
+      DataHelpers.addPoint(params,function(err, point){
+        if (err){
+          res.status(403).send();
+        }else{
+          res.status(200).json(point);
+        }
+      })
+    }
+  });
+
   mapsRoutes.post("/:map/points/:point", updatePoint);
   mapsRoutes.post("/:map/points/:point/imgs", uploadImg);
   mapsRoutes.delete("/:map/points/:point/imgs/:img", deleteImg);

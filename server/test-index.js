@@ -8,6 +8,7 @@ const expect = chai.expect;
 
 const testCases = {
 // Maps routes
+/*
   test_GET_maps : describe("GET '/maps' - mainpage", function() {
     it('should return 200 OK', function(done) {
       chai.request(server)
@@ -51,27 +52,33 @@ const testCases = {
         });
     });
   }),
-
+*/
   test_POST_point : describe("POST /maps/rmap/points", function() {
     it('should return Error 400', function(done) {
       chai.request(server)
-        .post('/maps/rmap/points')
+        .post('/maps/3/points')
         .end(function(err, res){
-          res.should.have.status(400);
+          res.should.have.status(403);
           done();
         });
     });
     it('should return Error 200 OK', function(done) {
       chai.request(server)
         .post('/maps/3/points')
-        .send({title: 'test'})
+        .set('content-type', 'application/x-www-form-urlencoded')
+        .send({
+          title: 'test2',
+          latitude: 51.0356,
+          longitude: -114.0708
+        })
         .end(function(err, res){
+          console.log("error");
           res.should.have.status(200);
           done();
         });
     });
   }),
-
+/*
   test_PUT_point : describe("POST /maps/rmap/points/:point -> update", function() {
     it('should return Error 400', function(done) {
       chai.request(server)
@@ -194,7 +201,7 @@ test_GET_user_profile : describe("GET /users/:user -> view own profile", functio
         });
     });
   }),
-
+*/
 
 }
 module.exports = testCases;
