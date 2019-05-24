@@ -70,16 +70,15 @@ function getMapPoints(mapId, cb) {
     });
 }
 
-function getUserWithId(userId, cb) {
-  knex.select('*').from('users')
-    .where('id', userId)
-    .asCallback(function(err, userInfo) {
-      if (err) {
-        throw err;
-      }
-      cb(userInfo[0])
-    });
+function getMapLikes() {
+
 }
+
+
+function getMapContributors() {
+  
+}
+
 
 
 // --------- Test Function Calls -----
@@ -87,4 +86,3 @@ function getUserWithId(userId, cb) {
 //getMap(3, console.log);
 //getMapPoints(3, console.log)
 //getPointImages(3, console.log)
-//getUserWithId(1, console.log)
