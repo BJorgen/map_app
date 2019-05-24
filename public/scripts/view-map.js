@@ -5,10 +5,9 @@ const updatePointContainer = function(point){
 }
 
 const handleFlagClick = function(point){
-  console.log("nice job", point);
   $.ajax(
     {
-      url: 'maps/:map/points/'+point,
+      url: '/maps/:map/points/'+point,
       method: 'GET',
       success: function (point) { updatePointContainer(point)},
       error: function (req, textStatus, errorThrown) {
@@ -50,7 +49,7 @@ function initMap() {
   poly = new google.maps.Polyline({  });
   $.ajax(
     {
-      url: 'maps/:map/points',
+      url: '/maps/:map/points',
       method: 'GET',
       success: function (res) { res.forEach(addPoint)},
       error: function (req, textStatus, errorThrown) {

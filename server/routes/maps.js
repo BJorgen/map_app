@@ -5,16 +5,18 @@ const mapsRoutes  = express.Router();
 
 const getMaps = require('./../util/mapObject');
 
+const getMap = function (req, res){
+  const templateVars = {
+    map: getMaps
+  };
+  res.render('view_map', templateVars);
+};
 
 const get = function (req, res){
   const templateVars = {
     map: getMaps
   };
   res.render('main', templateVars);
-};
-
-const getMap = function (req, res){
-  res.status(400).send();
 };
 
 const getPoints = function (req, res){

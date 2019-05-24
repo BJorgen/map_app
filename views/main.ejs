@@ -11,32 +11,10 @@
     <!-- External JS -->
     <script type="text/javascript" src="/vendor/jquery-2.2.3.min.js"></script>
     <!-- internal script --> 
-    <script type="text/javascript" src="scripts/view-map.js"></script> 
     <title>Main page</title>
 </head>
 <body>
   <% include partials/_header %>
-  <label id='centerlong' class="datacontainer"> <%= map.map_setting.center_long %> </label>
-  <label id='centerlat' class="datacontainer"> <%= map.map_setting.center_lat %> </label>
-  <h2><%= map.name %></h2>                                                                                                                                                                        
-  <div clas="container">
-      <div class="row-container row">
-          <div class=" col-7">                                
-              <div id="map">
-            <img class="" width="70px" height="70px"src="https://cdn2.iconfinder.com/data/icons/scenarium-vol-5/128/016_map_location_travel_navigation_city_street_road-512.png">
-          </div>
-        </div>
-      <div class=" col-5">
-        <div id="point-container">
-          <h3 class="title"></h3>
-          <p class="description"></p>
-          <img class="img"/>
-        </div>
-    </div>
-  </div>
-
-  <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGX4T5LFPiQQTFQk9CWQdHONYfbmbV--I&callback=initMap"></script>
-  </script>
+  MAPS
 </body>
 </html>
