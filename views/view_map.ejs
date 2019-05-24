@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="/styles/style.css" type="text/css" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>MappApp</title>
+    <link rel="stylesheet" href="/styles/style.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/header.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/view_map.css" type="text/css" />
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">  
     <!-- External JS -->
@@ -18,20 +20,29 @@
   <% include partials/_header %>
   <label id='centerlong' class="datacontainer"> <%= map.map_setting.center_long %> </label>
   <label id='centerlat' class="datacontainer"> <%= map.map_setting.center_lat %> </label>
-  <h2><%= map.name %></h2>                                                                                                                                                                        
+                                                                                                                                                                          
   <div clas="container">
       <div class="row-container row">
-          <div class=" col-7">                                
+          <div class=" col-7">
+            <div>
+              <h2>Map name : <%= map.name %></h2> 
+                <button class="right">Add New Point</button>
+                <button class="right">Like</button>
+              </div>                               
               <div id="map">
             <img class="" width="70px" height="70px"src="https://cdn2.iconfinder.com/data/icons/scenarium-vol-5/128/016_map_location_travel_navigation_city_street_road-512.png">
           </div>
         </div>
       <div class=" col-5">
         <div id="point-container">
-          <h3 class="title"></h3>
-          <p class="description"></p>
+          <h2 class="title"></h2>
+          <div class="desc-container">
+              <p class="description"></p>
+          </div>          
           <img class="img"/>
         </div>
+        <button class="right">Edit</button>
+        <button class="right">Delete</button>
     </div>
   </div>
 
