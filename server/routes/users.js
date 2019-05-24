@@ -11,4 +11,4 @@ module.exports = function(DataHelpers) {
   usersRoutes.get("/:user", getProfile);
 
   return usersRoutes;
-}();
+};

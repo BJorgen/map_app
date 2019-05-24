@@ -5,13 +5,6 @@ const mapsRoutes  = express.Router();
 
 const getMaps = require('./../util/mapObject');
 
-const getMap = function (req, res){
-  const templateVars = {
-    map: getMaps
-  };
-  res.render('view_map', templateVars);
-};
-
 const get = function (req, res){
   const templateVars = {
     map: getMaps
@@ -70,9 +63,22 @@ const deleteFavorite = function (req, res){
   res.status(400).send();
 };
 
-module.exports = function(DataHelpers) {
+module.exports = function(_DataHelpers) {
+
+  const DataHelpers = _DataHelpers;
+  console.log("export route", _DataHelpers);
   mapsRoutes.get("/", get);
-  mapsRoutes.get("/:map", getMap);
+  mapsRoutes.get("/:map", function (req, res){
+    DataHelpers.getMap(req.params.map, function(err, map){
+      if(err){
+        res.status(500).send();
+      }else if(! map){
+        res.status(404).send();
+      }else{
+        res.render('view_map', map);
+      }
+    });
+   });
   mapsRoutes.get("/:map/points", getPoints);
   mapsRoutes.get("/:map/points/:point", getPoint);
   mapsRoutes.post("/", createMap);
@@ -85,4 +91,4 @@ module.exports = function(DataHelpers) {
   mapsRoutes.delete("/:map/favorite", deleteFavorite);
 
   return mapsRoutes;
-}();
+};

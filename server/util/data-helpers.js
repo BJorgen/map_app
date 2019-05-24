@@ -39,7 +39,7 @@ function getMap(mapId, cb) {
           throw err;
         }
         map.settings = res;
-        cb(map)
+        cb(null, map)
       });
     });
 }
@@ -81,6 +81,7 @@ function getUserWithId(userId, cb) {
     });
 }
 
+module.exports = {getMap : getMap};
 
 // --------- Test Function Calls -----
 

@@ -11,9 +11,10 @@ app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-const sessionsRoutes = require("./routes/sessions");
-const mapsRoutes = require("./routes/maps");
-const usersRoutes = require("./routes/users");
+const datahelpers = require('./util/data-helpers');
+const sessionsRoutes = require("./routes/sessions")(datahelpers);
+const mapsRoutes = require("./routes/maps")(datahelpers);
+const usersRoutes = require("./routes/users")(datahelpers);
 app.use("/sessions", sessionsRoutes);
 app.use("/maps", mapsRoutes);
 app.use("/users", usersRoutes);
