@@ -5,13 +5,6 @@ const mapsRoutes  = express.Router();
 
 const getMaps = require('./../util/mapObject');
 
-const get = function (req, res){
-  const templateVars = {
-    map: getMaps
-  };
-  res.render('main', templateVars);
-};
-
 const getPoints = function (req, res){
   res.status(200).json(getMaps.points);
 };
@@ -61,11 +54,19 @@ const deleteFavorite = function (req, res){
   res.status(400).send();
 };
 
-module.exports = function(_DataHelpers) {
+module.exports = function(DataHelpers) {
 
-  const DataHelpers = _DataHelpers;
-  console.log("export route", _DataHelpers);
-  mapsRoutes.get("/", get);
+  mapsRoutes.get("/", function (req, res){
+    DataHelpers.getAllMaps(function(err, maps){
+      if(err){
+        res.status(500).send();
+      }else{
+        res.render('main',{maps});
+      }
+    })
+  });
+
+
   mapsRoutes.get("/:map", function (req, res){
     DataHelpers.getMap(req.params.map, function(err, map){
       if(err){
@@ -92,7 +93,6 @@ module.exports = function(_DataHelpers) {
       res.status(403).send();
     }
     else{
-      console.log("params to db", params);
       DataHelpers.addPoint(params,function(err, point){
         if (err){
           res.status(403).send();
