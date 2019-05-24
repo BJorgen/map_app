@@ -61,6 +61,15 @@ const testCases = {
           done();
         });
     });
+    it('should return Error 200 OK', function(done) {
+      chai.request(server)
+        .post('/maps/3/points')
+        .send({title: 'test'})
+        .end(function(err, res){
+          res.should.have.status(200);
+          done();
+        });
+    });
   }),
 
   test_PUT_point : describe("POST /maps/rmap/points/:point -> update", function() {
