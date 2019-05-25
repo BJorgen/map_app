@@ -101,10 +101,15 @@ const {enableNewPointEvent, disableNewPointEvent} = function(){
   return {
     enableNewPointEvent : function (){
         newPointListener = map.addListener('click', newPointEvent);
+        $("#toggleEditBtn").html("Cancel add point");
+        $("#toggleEditBtn").attr("onclick","disableNewPointEvent()")
+        
       },
       disableNewPointEvent : function(){
         google.maps.event.removeListener(newPointListener);
         newPointListener = null;
+        $("#toggleEditBtn").html("Add New Point");
+        $("#toggleEditBtn").attr("onclick","enableNewPointEvent()")
       }
 
   }
