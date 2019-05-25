@@ -5,9 +5,9 @@ exports.seed = function(knex, Promise) {
     .then(function () {
       // Inserts seed entries
       return knex('maps').insert([
-        {id: 1, name: 'Best Bridges In Calgary', public: true, user_id: 1, map_setting_id: 1},
-        {id: 2, name: 'Beautiful Buildings', public: true, user_id: 2, map_setting_id: 2},
-        {id: 3, name: 'Public Art Work', public: true, user_id: 2, map_setting_id: 3}
+        {id: 1000001, name: 'Best Bridges In Calgary', public: true, user_id: 1000001, map_setting_id: 1000001},
+        {id: 1000002, name: 'Beautiful Buildings', public: true, user_id: 1000002, map_setting_id: 1000002},
+        {id: 1000003, name: 'Public Art Work', public: true, user_id: 1000002, map_setting_id: 1000003}
       ]);
     });
 };

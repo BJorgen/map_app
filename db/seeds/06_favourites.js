@@ -5,8 +5,8 @@ exports.seed = function(knex, Promise) {
     .then(function () {
       // Inserts seed entries
       return knex('favourites').insert([
-        {id: 1, user_id: 3, map_id: 1},
-        {id: 2, user_id: 3, map_id: 2}
+        {id: 1000001, user_id: 1000003, map_id: 1000001},
+        {id: 1000002, user_id: 1000003, map_id: 1000002}
       ]);
     });
 };
