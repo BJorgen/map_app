@@ -110,8 +110,7 @@ module.exports = function(DataHelpers) {
       res.status(403).send();
     }
     else{
-      DataHelpers.getPointById(Number(req.params.point), getSendJSOnonSuccess(res));
-      //TODO use datahelper delete func
+      DataHelpers.editPointById(Number(req.params.point), params, getSendJSOnonSuccess(res));
     }
   });
   mapsRoutes.post("/:map/points/:point/imgs", uploadImg);

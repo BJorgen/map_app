@@ -149,7 +149,7 @@ module.exports = function(knex){
       if (err) {
         throw err;
       }
-      cb(null, res)
+      cb(null, res[0])
     });
   }
 
