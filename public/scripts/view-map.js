@@ -17,22 +17,39 @@ const handleFlagClick = function(point){
   );
 }
 
-const addPoint = function(point) {
-  var contentString = point.description;
-  //TODO delete unnecessary props from parker init
-  var marker = new google.maps.Marker({
-    position: {lng : Number(point.longitude), lat : Number(point.latitude)},
-    draggable: false,
+const getGoogleMarker = function(coord){
+  let marker = new google.maps.Marker({
+    position: coord,
     icon: "https://img.icons8.com/doodle/30/000000/filled-flag.png",
     map: map,
-    content: contentString
   });
+  return marker;
+}
+
+const addPoint = function(point) {
+  let marker = getGoogleMarker({lng : Number(point.longitude), lat : Number(point.latitude)});
   var infowindow = new google.maps.InfoWindow({
     content: `<div><button onclick=handleFlagClick(${point.id})>View</button>${point.title}</div>`
   });
  marker.addListener('click', function () {
     infowindow.open(map, marker);
   });
+}
+
+function newPointEvent(event) {
+  let marker = getGoogleMarker(event.latLng);
+  let infowindow = new google.maps.InfoWindow({
+    content: `<div><button onclick=handleFlagClick(3)>View</button>This is the title</div>`
+  });
+ marker.addListener('click', function () {
+    infowindow.open(map, marker);
+  });
+
+}
+
+function enableNewPointEvent(){
+  console.log("hi there");
+  map.addListener('click', newPointEvent);
 }
 
 // call back function for Google API call
@@ -65,4 +82,3 @@ function initMap() {
 $( document ).ready(function() {
   
 });
-
