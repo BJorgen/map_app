@@ -63,23 +63,13 @@ module.exports = function(knex){
     })
   }
 
-//==============================================
-//             GET USER PROFILE
-//==============================================
-
-
-  function getUserProfile (userId, cb){
-
-  }
-
 
   return { 
     getUserById, 
     getUserByUsername, 
     getUserByEmail, 
     getAllUsers, 
-    addUser, 
-    getUserProfile
+    addUser
   }
 
 }

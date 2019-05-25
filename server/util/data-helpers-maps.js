@@ -228,6 +228,51 @@ module.exports = function(knex){
     });
   }
 
+
+//==============================================
+//             GET USER PROFILE
+//==============================================
+// ---- responds with array of user favourite maps (map_id) -----
+  function getUserFavourites (userId, cb) {
+    knex.select('*').from('favourites')
+    .where('user_id',userId)
+    .asCallback((err, res) => {
+      if (err) {
+        throw err;
+      }
+      mapsArray = res.map(x => x.map_id)
+      cb(null, mapsArray)
+    });
+  }
+// ---- responds with array of user contributed maps (map_id) -----
+  function getUserContributions (userId, cb) {
+    knex.select('*').from('contributors')
+    .where('user_id',userId)
+    .asCallback((err, res) => {
+      if (err) {
+        throw err;
+      }
+      mapArray = res.map(x => x.map_id)
+      cb(null, mapsArray)
+    });
+  }
+
+  function getUserProfile (userId, cb) {
+    let userProfile= {user_id : userId}
+    getUserFavourites(userId, (err, res) => {
+      if (err) {
+        throw err;
+      }
+      userProfile.favourites=res;
+      getUserContributions(userId, (err, res) => {
+        userProfile.contributions = res;
+        cb(null, userProfile)
+      });
+    });
+  }
+
+
+
   return { 
     getMap, 
     getPointImages, 
@@ -240,7 +285,8 @@ module.exports = function(knex){
     addMapFavourite,
     deleteMapFavourite,
     getMapContributors,
-    addMapContributor
+    addMapContributor,
+    getUserProfile
   }
 
 }
