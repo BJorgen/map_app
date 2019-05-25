@@ -40,7 +40,7 @@ exports.up = function(knex, Promise) {
     table.increments('id').primary()
     table.string('image_url', 255)
     table.integer('point_id')
-    table.foreign('point_id').references('points.id')
+    table.foreign('point_id').references('points.id').onDelete('CASCADE')
   })
   .createTable('favourites', function (table) {
     table.increments('id').primary()
