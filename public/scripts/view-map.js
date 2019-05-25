@@ -1,4 +1,11 @@
+var map_id;
+var map;
+var pointMap = {}
+var nonPersistentPoint;
+var activePoint;
+
 const updatePointContainer = function(point){
+  activePoint = point;
   $('#point-container .title').text(point.title);
   $('#point-container .description').text(point.description);
   $('#point-container .img').attr("src",point.image_url);
@@ -26,6 +33,23 @@ const getGoogleMarker = function(coord){
   return marker;
 }
 
+const deleteActivePoint = function(){
+  console.log(pointMap[activePoint.id]);
+  $.ajax(
+    {
+      url: '/maps/'+map_id+'/points/'+activePoint.id,
+      method: 'DELETE',
+      success: function (res) { 
+        pointMap[activePoint.id].setMap(null);
+        delete pointMap[activePoint.id];
+      },
+      error: function (req, textStatus, errorThrown) {
+        alert("you have left the happy path");
+      }
+    }
+  );
+}
+
 const addPoint = function(point) {
   let marker = getGoogleMarker({lng : Number(point.longitude), lat : Number(point.latitude)});
   var infowindow = new google.maps.InfoWindow({
@@ -34,6 +58,7 @@ const addPoint = function(point) {
  marker.addListener('click', function () {
     infowindow.open(map, marker);
   });
+  pointMap[point.id] = marker;
 }
 
 function newPointEvent(event) {
@@ -67,7 +92,7 @@ function initMap() {
   //TODO try to use HTML data attribute
   const centerlong = Number($('#centerlong').html());
   const center_lat = Number($('#centerlat').html());
-  const map_id = Number($('#mapid').html());
+  map_id = Number($('#mapid').html());
   
   map = new google.maps.Map(document.getElementById('map'), {
     zoom: 12,
