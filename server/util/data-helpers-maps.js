@@ -140,13 +140,26 @@ module.exports = function(knex){
     });
   }
 
+  function editPointById(point_id, point, cb) {
+    knex('points')
+    .where({ id: point_id })
+    .update(point)
+    .returning('*')
+    .asCallback((err, res) => {
+      if (err) {
+        throw err;
+      }
+      cb(null, res)
+    });
+  }
 
-function deletePointByID(map_id, cb) {
-  knex('points')
-  .where('id', map_id)
-  .del()
-  .asCallback(cb);
-}
+  function deletePointByID(point_id, cb) {
+    knex('points')
+    .where('id', point_id)
+    .del()
+    .asCallback(cb);
+  }
+
 
 //==============================================
 //       GET, ADD and DELETE MAP FAVORITE
@@ -289,6 +302,7 @@ function deletePointByID(map_id, cb) {
     getPointById,
     addMap,
     addPoint,
+    editPointById,
     deletePointByID,
     getMapFavourites,
     addMapFavourite,

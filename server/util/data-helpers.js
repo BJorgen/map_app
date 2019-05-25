@@ -90,3 +90,10 @@ module.exports = dataHelpers;
 
 
 // map_helpers.getUserProfile(3, (err, res) => console.log(res))
+
+// pointData2 = {
+//     title: 'Changed Point',
+//     description: 'Fun Place - I changed the point desctiption!! fun'
+// }
+
+// map_helpers.editPointById(1000001,pointData2,(err, res) => console.log(res))
