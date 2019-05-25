@@ -46,15 +46,15 @@ module.exports = dataHelpers;
 //==============================================
 
 
-// map_helpers.getMap(3, (err, res) => console.log(res))
-// map_helpers.getMapPoints(1, (err, res) => console.log(res))
-// map_helpers.getPointImages(3, (err, res) => console.log(res))
+// map_helpers.getMap(1000003, (err, res) => console.log(res))
+// map_helpers.getMapPoints(1000001, (err, res) => console.log(res))
+// map_helpers.getPointImages(1000003, (err, res) => console.log(res))
 
 // const mapData = {
 //     map: {
 //       name: 'Eating out During Bootcamp',
 //       public: true,
-//       user_id: 1
+//       user_id: 1000001
 //     },
 //     settings: {
 //       center_long: -114.0666796,
@@ -67,29 +67,29 @@ module.exports = dataHelpers;
 
 // map_helpers.getAllMaps((err, res) => console.log(res))
 
-// map_helpers.getPointById(1,(err, res) => console.log(res))
+// map_helpers.getPointById(1000001,(err, res) => console.log(res))
 
 // const pointData = {
 //     title: 'New Point',
 //     description: 'Fun Place',
 //     longitude: '-114.058937',
 //     latitude: '51.046669',
-//     map_id: 1
+//     map_id: 1000001
 // }
 
 // map_helpers.addPoint(pointData, (err, res) => console.log(res))
 
 
 
-// map_helpers.addMapFavourite(1, 2, (err, res) => console.log(res))
-// map_helpers.getMapFavourites(1, (err, res) => console.log(res))
-// map_helpers.deleteMapFavourite(1, 2, (err, res) => console.log(res))
+// map_helpers.addMapFavourite(1000001, 1000002, (err, res) => console.log(res))
+// map_helpers.getMapFavourites(1000001, (err, res) => console.log(res))
+// map_helpers.deleteMapFavourite(1000001, 1000002, (err, res) => console.log(res))
 
-// map_helpers.addMapContributor(3, 2, (err, res) => console.log(res))
-// map_helpers.getMapContributors(3, (err, res) => console.log(res))
+// map_helpers.addMapContributor(1000003, 1000002, (err, res) => console.log(res))
+// map_helpers.getMapContributors(1000003, (err, res) => console.log(res))
 
 
-// map_helpers.getUserProfile(3, (err, res) => console.log(res))
+// map_helpers.getUserProfile(1000003, (err, res) => console.log(res))
 
 // pointData2 = {
 //     title: 'Changed Point',

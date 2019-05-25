@@ -118,8 +118,10 @@ module.exports = function(knex){
 //==============================================
 // ---- responds with point object -----
   function getPointById(pointId, cb) {
-    knex.select('*').from('points')
-      .where('id', pointId)
+    knex.select('points.*',{ image_id: 'images.id' }, {image_url : 'images.image_url'})
+      .from('points')
+      .leftJoin('images','points.id','images.point_id')
+      .where('points.id', pointId)
       .asCallback(function(err, pointInfo) {
         if (err) {
           throw err;
