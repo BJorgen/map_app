@@ -140,6 +140,14 @@ module.exports = function(knex){
     });
   }
 
+
+function deletePointByID(map_id, cb) {
+  knex('points')
+  .where('id', map_id)
+  .del()
+  .asCallback(cb);
+}
+
 //==============================================
 //       GET, ADD and DELETE MAP FAVORITE
 //==============================================
@@ -281,6 +289,7 @@ module.exports = function(knex){
     getPointById,
     addMap,
     addPoint,
+    deletePointByID,
     getMapFavourites,
     addMapFavourite,
     deleteMapFavourite,
