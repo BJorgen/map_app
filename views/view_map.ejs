@@ -18,14 +18,15 @@
 </head>
 <body>
   <% include partials/_header %>
-  <label id='centerlong' class="datacontainer"> <%= map.map_setting.center_long %> </label>
-  <label id='centerlat' class="datacontainer"> <%= map.map_setting.center_lat %> </label>
+  <label id='centerlong' class="datacontainer"> <%= settings.center_long %> </label>
+  <label id='centerlat' class="datacontainer"> <%= settings.center_lat %> </label>
+  <label id='mapid' class="datacontainer"> <%= id %> </label>
                                                                                                                                                                           
   <div clas="container">
       <div class="row-container row">
           <div class=" col-7">
             <div>
-              <h2>Map name : <%= map.name %></h2> 
+              <h2>Map name : <%= name %></h2> 
                 <button class="right">Add New Point</button>
                 <button class="right">Like</button>
               </div>                               

@@ -40,6 +40,7 @@ function initMap() {
   //TODO try to use HTML data attribute
   const centerlong = Number($('#centerlong').html());
   const center_lat = Number($('#centerlat').html());
+  const map_id = Number($('#mapid').html());
   
   map = new google.maps.Map(document.getElementById('map'), {
     zoom: 12,
@@ -49,9 +50,9 @@ function initMap() {
   poly = new google.maps.Polyline({  });
   $.ajax(
     {
-      url: '/maps/:map/points',
+      url: '/maps/'+map_id+'/points',
       method: 'GET',
-      success: function (res) { res.forEach(addPoint)},
+      success: function (res) { console.log(res);res.forEach(addPoint)},
       error: function (req, textStatus, errorThrown) {
         alert("you have left the happy path");
       }
