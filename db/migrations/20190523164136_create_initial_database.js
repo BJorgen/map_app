@@ -21,9 +21,9 @@ exports.up = function(knex, Promise) {
     table.string('name', 255).notNullable()
     table.boolean('public')
     table.integer('user_id')
-    table.foreign('user_id').references('users.id')
+    table.foreign('user_id').references('users.id').onDelete('CASCADE')
     table.integer('map_setting_id')
-    table.foreign('map_setting_id').references('map_settings.id')
+    table.foreign('map_setting_id').references('map_settings.id').onDelete('CASCADE')
     table.timestamp('created_at').defaultTo(knex.fn.now())
   })
   .createTable('points', function (table) {
@@ -34,7 +34,7 @@ exports.up = function(knex, Promise) {
     table.decimal('longitude',9,6)
     table.decimal('latitude',9,6)
     table.integer('map_id')
-    table.foreign('map_id').references('maps.id')
+    table.foreign('map_id').references('maps.id').onDelete('CASCADE')
   })
   .createTable('images', function (table) {
     table.increments('id').primary()
@@ -45,16 +45,16 @@ exports.up = function(knex, Promise) {
   .createTable('favourites', function (table) {
     table.increments('id').primary()
     table.integer('user_id')
-    table.foreign('user_id').references('users.id')
+    table.foreign('user_id').references('users.id').onDelete('CASCADE')
     table.integer('map_id')
-    table.foreign('map_id').references('maps.id')
+    table.foreign('map_id').references('maps.id').onDelete('CASCADE')
   })
   .createTable('contributors', function (table) {
     table.increments('id').primary()
     table.integer('user_id')
-    table.foreign('user_id').references('users.id')
+    table.foreign('user_id').references('users.id').onDelete('CASCADE')
     table.integer('map_id')
-    table.foreign('map_id').references('maps.id')
+    table.foreign('map_id').references('maps.id').onDelete('CASCADE')
     table.timestamp('modified_at').defaultTo(knex.fn.now())
 
   })
