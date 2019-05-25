@@ -17,16 +17,17 @@ const handleFlagClick = function(point){
   );
 }
 
-const addPoint = function(point) {
-  var contentString = point.description;
-  //TODO delete unnecessary props from parker init
-  var marker = new google.maps.Marker({
-    position: {lng : Number(point.longitude), lat : Number(point.latitude)},
-    draggable: false,
+const getGoogleMarker = function(coord){
+  let marker = new google.maps.Marker({
+    position: coord,
     icon: "https://img.icons8.com/doodle/30/000000/filled-flag.png",
     map: map,
-    content: contentString
   });
+  return marker;
+}
+
+const addPoint = function(point) {
+  let marker = getGoogleMarker({lng : Number(point.longitude), lat : Number(point.latitude)});
   var infowindow = new google.maps.InfoWindow({
     content: `<div><button onclick=handleFlagClick(${point.id})>View</button>${point.title}</div>`
   });
@@ -34,6 +35,32 @@ const addPoint = function(point) {
     infowindow.open(map, marker);
   });
 }
+
+function newPointEvent(event) {
+  let marker = getGoogleMarker(event.latLng);
+  $('#centerlat').text(marker.getPosition().lat());
+  $('#centerlong').text(marker.getPosition().lng());
+  let infowindow = new google.maps.InfoWindow({
+    content: `<div>Add a title</div>`
+  });
+ marker.addListener('click', function () {
+    infowindow.open(map, marker);
+  });
+  $('#newPointForm').show();
+}
+
+const {enableNewPointEvent, disableNewPointEvent} = function(){
+  let newPointListener = null;
+  return {
+    enableNewPointEvent : function (){
+        newPointListener = map.addListener('click', newPointEvent);
+      },
+      disableNewPointEvent : function(){
+        google.maps.event.removeListener(newPointListener);
+      }
+
+  }
+}();
 
 // call back function for Google API call
 function initMap() {
@@ -52,7 +79,7 @@ function initMap() {
     {
       url: '/maps/'+map_id+'/points',
       method: 'GET',
-      success: function (res) { console.log(res);res.forEach(addPoint)},
+      success: function (res) { res.forEach(addPoint)},
       error: function (req, textStatus, errorThrown) {
         alert("you have left the happy path");
       }
@@ -62,7 +89,36 @@ function initMap() {
   
 }
 
-$( document ).ready(function() {
-  
-});
+const bindAjaxOnSubmit = function(errorObj){
+  const map_id = Number($('#mapid').html());
+  $( "#newPointForm" ).on( "submit", function( event ) {
+    event.preventDefault();
+    const pointData = {
+      title : this.querySelector('input').value,
+      description : this.querySelector('textarea').value,
+      longitude : Number($('#centerlong').html()),
+      latitude : Number($('#centerlat').html()),
+      map_id : map_id
+    }
+    $.ajax({
+      url : '/maps/'+map_id+'/points',
+      method: 'POST' ,
+      data :  pointData,
+      success: function(res){
+        disableNewPointEvent();
+        $('#newPointForm').hide();
+        updatePointContainer(res);
+      },
+      error: function(req, textStatus, errorThrown) {
+        alert("you have left the happy path")
+      }
+    });
+    this.querySelector('textarea').value = "";
+    this.querySelector('input').value = "";
+  });
+}
 
+$( document ).ready(function() {
+  $('.popups').hide();
+  bindAjaxOnSubmit();
+});

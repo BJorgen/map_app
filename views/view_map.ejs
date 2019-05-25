@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/styles/style.css" type="text/css" />
     <link rel="stylesheet" href="/styles/header.css" type="text/css" />
     <link rel="stylesheet" href="/styles/view_map.css" type="text/css" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">  
     <!-- External JS -->
@@ -27,8 +28,8 @@
           <div class=" col-7">
             <div>
               <h2>Map name : <%= name %></h2> 
-                <button class="right">Add New Point</button>
-                <button class="right">Like</button>
+                <button class="right" onclick="enableNewPointEvent()">Add New Point</button>
+                <button class="right" >Like</button>
               </div>                               
               <div id="map">
             <img class="" width="70px" height="70px"src="https://cdn2.iconfinder.com/data/icons/scenarium-vol-5/128/016_map_location_travel_navigation_city_street_road-512.png">
@@ -45,6 +46,29 @@
         <button class="right">Edit</button>
         <button class="right">Delete</button>
     </div>
+  </div>
+
+  <di id="popups">
+    <form id="newPointForm" action="/maps/:map/points" method="POST"  class="w3-modal">
+      <div class="w3-modal-content w3-card-4">
+        <header class="w3-container w3-teal">
+          <span onclick="$('#newPointForm').hide()" class="w3-button w3-display-topright">&times;</span>
+          <h2>Create new point</h2>
+        </header>
+        <label for="title"><b>Title</b></label>
+        <input type="text" placeholder="Enter point name" name="title" required>
+        <br/>
+        <label for="description"><b>Description</b></label>
+        <textarea name="description" placeholder="Optional"></textarea>
+        <footer class="w3-container w3-teal">
+          <button type="submit" class="btn">Submit</button>
+          <button type="button" class="btn cancel" onclick="$('#newPointForm').hide()">
+            Close
+          </button>
+          <output class="error"></output> 
+        </footer>
+      </div>
+    </form>
   </div>
 
   <script async defer
