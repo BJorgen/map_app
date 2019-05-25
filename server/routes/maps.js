@@ -5,9 +5,7 @@ const mapsRoutes  = express.Router();
 
 const getMaps = require('./../util/mapObject');
 
-const getPoints = function (req, res){
-  res.status(200).json(getMaps.points);
-};
+
 
 const getPoint = function (req, res){
   let point;
@@ -78,7 +76,19 @@ module.exports = function(DataHelpers) {
       }
     });
    });
-  mapsRoutes.get("/:map/points", getPoints);
+
+  mapsRoutes.get("/:map/points",  function (req, res){
+    console.log("mapid",req.params.map);
+    const cb = function(err, points){
+      if(err){
+        res.status(404).send();
+      }else{
+        res.json(points);
+      }
+    }
+    DataHelpers.getMapPoints(req.params.map, cb);
+  });
+
   mapsRoutes.get("/:map/points/:point", getPoint);
   mapsRoutes.post("/", createMap);
   mapsRoutes.post("/:map/points", function (req, res){
