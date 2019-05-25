@@ -89,4 +89,4 @@ module.exports = dataHelpers;
 // map_helpers.getMapContributors(3, (err, res) => console.log(res))
 
 
-map_helpers.getUserProfile(3, (err, res) => console.log(res))
+// map_helpers.getUserProfile(3, (err, res) => console.log(res))
