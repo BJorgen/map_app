@@ -19,10 +19,6 @@ const deleteImg = function (req, res){
   res.status(400).send();
 };
 
-const deletePoint = function (req, res){
-  res.status(400).send();
-};
-
 const createFavorite = function (req, res){
   res.status(400).send();
 };
@@ -110,7 +106,24 @@ module.exports = function(DataHelpers) {
   mapsRoutes.post("/:map/points/:point", updatePoint);
   mapsRoutes.post("/:map/points/:point/imgs", uploadImg);
   mapsRoutes.delete("/:map/points/:point/imgs/:img", deleteImg);
-  mapsRoutes.delete("/:map/points/:point", deletePoint);
+
+  mapsRoutes.delete("/:map/points/:point", function (req, res){
+    const pointdId = req.params.point;
+    console.log("pointdId", pointdId);
+    if(! (pointdId)){
+      res.status(400).send();
+    }
+    DataHelpers.deletePointByID(pointdId, function(err){
+      if(err){
+        console.log("err on point delete", err);
+        res.status(404).send();
+      }else{
+        console.log("ok")
+        res.status(200).send("OK");
+      }  
+    })
+  });
+
   mapsRoutes.post("/:map/favorite", createFavorite);
   mapsRoutes.delete("/:map/favorite", deleteFavorite);
 
