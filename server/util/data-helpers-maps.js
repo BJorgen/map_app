@@ -1,5 +1,8 @@
 module.exports = function(knex){
 
+//==============================================
+//             GET MAP and SETTINGS
+//==============================================
 
   function getMapSettings(mapSettingId, cb) {
     knex.select('*').from('map_settings')
@@ -9,7 +12,7 @@ module.exports = function(knex){
           throw err;
         }
         cb(null,mapSettings[0]);
-        });
+      });
   }
 
 
@@ -33,6 +36,11 @@ module.exports = function(knex){
   }
 
 
+
+//==============================================
+//         GET map POINTS with IMAGES
+//==============================================
+
   function getPointImages(pointId, cb) {
     knex.select('*').from('images')
     .where('point_id', pointId)
@@ -40,11 +48,11 @@ module.exports = function(knex){
       if (err) {
         throw err;
       }
-      cb(null, pointImages)
+      cb(null, pointImages);
     });
   }
 
-
+// ---- returns a list of map points/detail in an map -----
   function getMapPoints(mapId, cb) {
     knex.select('*',{ image_id: 'images.id' }).from('points')
       .innerJoin('images','points.id','images.point_id')
@@ -53,35 +61,50 @@ module.exports = function(knex){
         if (err) {
           throw err;
         }
-        cb(null, mapPoints)
+        cb(null, mapPoints);
       });
   }
 
-
+//==============================================
+//                GET ALL MAPS
+//==============================================
+// ---- returns a list of all maps -----
   function getAllMaps(cb) {
     knex.select('*').from('maps').asCallback((err, res) => {
       if (err) {
         throw err;
       }
-      cb(null,res)
+      cb(null,res);
     });
   }
 
-
-  function addMapSettings(settings,cb) {
-    knex('map_settings').insert(mapData.settings).returning('id').asCallback((err, settingsId)=> {
+//==============================================
+//             ADD MAP and SETTINGS
+//==============================================
+// ---- helper function for add map to create map settings -----
+  function addMapSettings(mapSettings, cb) {
+    knex('map_settings')
+    .insert(mapSettings)
+    .returning('id')
+    .asCallback((err, settingsId)=> {
       if (err) {
         throw err;
       }
-      cb(null, settingsId[0])
+      cb(null, settingsId[0]);
     });
   }
 
-
-  function addMap(mapData, cb) {
-    addMapSettings(mapData.settings, function(mapSettingsId) {
-      mapData.map.map_setting_id = mapSettingsId;
-      knex('maps').insert(mapData.map).returning('id').asCallback((err, mapId)=> {
+// ---- responds with map object -----
+  function addMap(data, cb) {
+    addMapSettings(data.settings, function(err, mapSettingsId) {
+      if (err) {
+        throw err;
+      }
+      data.map.map_setting_id = mapSettingsId;
+      knex('maps')
+      .insert(data.map)
+      .returning('id')
+      .asCallback((err, mapId)=> {
         if (err) {
           throw err;
         }
@@ -90,6 +113,10 @@ module.exports = function(knex){
     });
   }
 
+//==============================================
+//          ADD and GET POINT by Id
+//==============================================
+// ---- responds with point object -----
   function getPointById(pointId, cb) {
     knex.select('*').from('points')
       .where('id', pointId)
@@ -97,32 +124,169 @@ module.exports = function(knex){
         if (err) {
           throw err;
         }
-        cb(null, pointInfo[0])
+        cb(null, pointInfo[0]);
       });
   }
 
-
+// ---- responds with point object -----
   function addPoint(point, cb) {
-    knex('points').insert(point).returning('id').asCallback((err, pointId)=> {
+    knex('points').insert(point)
+    .returning('id')
+    .asCallback((err, pointId)=> {
       if (err) {
         throw err;
       }
-      getPointById(pointId[0],cb);
+      getPointById(pointId[0], cb);
+    });
+  }
+
+//==============================================
+//       GET, ADD and DELETE MAP FAVORITE
+//==============================================
+// ---- responds with array of favourites (user_id) for map -----
+  function getMapFavourites(map_id, cb) {
+    knex.select('user_id').from('favourites')
+    .where('map_id', map_id)
+    .asCallback(function(err, favourites) {
+      if (err) {
+        throw err;
+      }
+      userArray = favourites.map(x => x.user_id);
+      cb(null, userArray)
+    });
+  }
+
+// ---- responds with array of favourites (user_id) for map -----
+  function addMapFavourite(user_id, map_id, cb) {
+    getMapFavourites(map_id, function(err, userArray) {
+      if (err) {
+        throw err;
+      }
+      if (userArray.includes(user_id)) {
+        getMapFavourites(map_id, cb);
+      }
+      else {
+        knex('favourites')
+        .insert({user_id: user_id, map_id: map_id})
+        .asCallback((err, res) => {
+          if (err) {
+            throw err;
+          }
+          getMapFavourites(map_id, cb);
+        });
+      }
+    });
+  }
+
+// ---- responds with array of favourites (user_id) for map -----
+  function deleteMapFavourite(user_id, map_id, cb) {
+    knex('favourites')
+    .where('user_id', user_id)
+    .andWhere('map_id', map_id)
+    .del()
+    .asCallback((err, res) => {
+      getMapFavourites(map_id, cb);
+    });
+  }
+  
+//==============================================
+//         GET and ADD MAP CONTRIBUTOR
+//==============================================
+
+// ---- responds with array of contributors (user_id) for map -----
+  function getMapContributors(map_id, cb) {
+    knex.select('user_id').from('contributors')
+    .where('map_id', map_id)
+    .asCallback(function(err, contributors) {
+      if (err) {
+        throw err;
+      }
+      userArray = contributors.map(x => x.user_id);
+      cb(null, userArray);
+    });
+  }
+
+// ---- responds with array of contributors (user_id) for map -----
+  function addMapContributor(user_id, map_id, cb) {
+    getMapContributors(map_id, function(err, userArray) {
+      if (err) {
+        throw err;
+      }
+      if (userArray.includes(user_id)) {
+        cb(null, userArray);
+      }
+      else {
+        knex('contributors')
+        .insert({user_id: user_id, map_id: map_id})
+        .asCallback((err, res)=> {
+          if (err) {
+            throw err;
+          }
+          getMapContributors(map_id, cb);
+        });
+      }
     });
   }
 
 
-  function getMapLikes() {
-
+//==============================================
+//             GET USER PROFILE
+//==============================================
+// ---- responds with array of user favourite maps (map_id) -----
+  function getUserFavourites (userId, cb) {
+    knex.select('*').from('favourites')
+    .where('user_id',userId)
+    .asCallback((err, res) => {
+      if (err) {
+        throw err;
+      }
+      mapsArray = res.map(x => x.map_id)
+      cb(null, mapsArray)
+    });
+  }
+// ---- responds with array of user contributed maps (map_id) -----
+  function getUserContributions (userId, cb) {
+    knex.select('*').from('contributors')
+    .where('user_id',userId)
+    .asCallback((err, res) => {
+      if (err) {
+        throw err;
+      }
+      mapArray = res.map(x => x.map_id)
+      cb(null, mapsArray)
+    });
   }
 
-  function getMapContributors() {
-
+  function getUserProfile (userId, cb) {
+    let userProfile= {user_id : userId}
+    getUserFavourites(userId, (err, res) => {
+      if (err) {
+        throw err;
+      }
+      userProfile.favourites=res;
+      getUserContributions(userId, (err, res) => {
+        userProfile.contributions = res;
+        cb(null, userProfile)
+      });
+    });
   }
 
-  return { getMapSettings, getMap, getPointImages, getMapPoints, getAllMaps, addMapSettings, addMap, getPointById, addPoint }
+
+
+  return { 
+    getMap, 
+    getPointImages, 
+    getMapPoints, 
+    getAllMaps,
+    getPointById,
+    addMap,
+    addPoint,
+    getMapFavourites,
+    addMapFavourite,
+    deleteMapFavourite,
+    getMapContributors,
+    addMapContributor,
+    getUserProfile
+  }
+
 }
-
-
-
-

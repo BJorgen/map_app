@@ -1,5 +1,9 @@
 module.exports = function(knex){
 
+//==============================================
+//       GET USER - By Id, username, email
+//==============================================
+  
   function getUserById(userId, cb) {
     knex.select('*').from('users')
       .where('id', userId)
@@ -33,6 +37,9 @@ module.exports = function(knex){
       });
   }
 
+//==============================================
+//                GET ALL USERS
+//==============================================
 
   function getAllUsers(cb) {
     knex.select('*').from('users').asCallback((err, res) => {
@@ -43,6 +50,9 @@ module.exports = function(knex){
     });
   }
 
+//==============================================
+//                  ADD USER
+//==============================================
 
   function addUser(user, cb) {
     knex('users').insert(user).returning('id').asCallback((err, userId)=> {
@@ -53,8 +63,13 @@ module.exports = function(knex){
     })
   }
 
-  function getUserProfile (userId, cb){
+
+  return { 
+    getUserById, 
+    getUserByUsername, 
+    getUserByEmail, 
+    getAllUsers, 
+    addUser
   }
 
-  return { getUserById, getUserByUsername, getUserByEmail, getAllUsers, addUser }
 }
