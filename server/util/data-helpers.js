@@ -88,7 +88,8 @@ module.exports = dataHelpers;
 // map_helpers.addMapContributor(1000003, 1000002, (err, res) => console.log(res))
 // map_helpers.getMapContributors(1000003, (err, res) => console.log(res))
 
-
+// map_helpers.getUserFavourites(1000001, (err, res) => console.log(res))
+// map_helpers.getUserContributions(1000001, (err, res) => console.log(res))
 // map_helpers.getUserProfile(1000003, (err, res) => console.log(res))
 
 // pointData2 = {
