@@ -43,8 +43,8 @@
           </div>          
           <img class="img"/>
         </div>
-        <button class="right">Edit</button>
-        <button class="right" onclick="deleteActivePoint()">Delete</button>
+        <button id="edit-point" class="right">Edit</button>
+        <button id="delete-point" class="right" onclick="deleteActivePoint()">Delete</button>
     </div>
   </div>
 
@@ -52,7 +52,7 @@
     <form id="newPointForm" action="/maps/:map/points" method="POST"  class="w3-modal">
       <div class="w3-modal-content w3-card-4">
         <header class="w3-container w3-teal">
-          <span onclick="$('#newPointForm').hide()" class="w3-button w3-display-topright">&times;</span>
+          <span onclick="cancelAddNewPoint()" class="w3-button w3-display-topright">&times;</span>
           <h2>Create new point</h2>
         </header>
         <label for="title"><b>Title</b></label>
@@ -62,7 +62,7 @@
         <textarea name="description" placeholder="Optional"></textarea>
         <footer class="w3-container w3-teal">
           <button type="submit" class="btn">Submit</button>
-          <button type="button" class="btn cancel" onclick="$('#newPointForm').hide()">
+          <button type="button" class="btn cancel" onclick="cancelAddNewPoint()">
             Close
           </button>
           <output class="error"></output> 

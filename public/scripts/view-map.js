@@ -1,7 +1,7 @@
 var map_id;
 var map;
 var pointMap = {}
-var nonPersistentPoint;
+var nonPersistentMarker;
 var activePoint;
 
 const updatePointContainer = function(point){
@@ -9,6 +9,17 @@ const updatePointContainer = function(point){
   $('#point-container .title').text(point.title);
   $('#point-container .description').text(point.description);
   $('#point-container .img').attr("src",point.image_url);
+  $('#edit-point').show();
+  $('#delete-point').show();
+}
+
+const clearPointContainer = function(point){
+  activePoint = point;
+  $('#point-container .title').text("");
+  $('#point-container .description').text("");
+  $('#point-container .img').attr("src","");
+  $('#edit-point').hide();
+  $('#delete-point').hide();
 }
 
 const handleFlagClick = function(point){
@@ -42,6 +53,7 @@ const deleteActivePoint = function(){
       success: function (res) { 
         pointMap[activePoint.id].setMap(null);
         delete pointMap[activePoint.id];
+        clearPointContainer();
       },
       error: function (req, textStatus, errorThrown) {
         alert("you have left the happy path");
@@ -62,7 +74,8 @@ const addPoint = function(point) {
 }
 
 function newPointEvent(event) {
-  let marker = getGoogleMarker(event.latLng);
+  marker = getGoogleMarker(event.latLng);
+  nonPersistentMarker = marker;
   $('#centerlat').text(marker.getPosition().lat());
   $('#centerlong').text(marker.getPosition().lng());
   let infowindow = new google.maps.InfoWindow({
@@ -86,6 +99,13 @@ const {enableNewPointEvent, disableNewPointEvent} = function(){
 
   }
 }();
+
+const cancelAddNewPoint = function(){
+  $('#newPointForm').hide();
+  nonPersistentMarker.setMap(null);
+  nonPersistentMarker = null;
+  disableNewPointEvent();
+}
 
 // call back function for Google API call
 function initMap() {
@@ -130,7 +150,8 @@ const bindAjaxOnSubmit = function(errorObj){
       method: 'POST' ,
       data :  pointData,
       success: function(res){
-        disableNewPointEvent();
+        cancelAddNewPoint();
+        addPoint(res);
         $('#newPointForm').hide();
         updatePointContainer(res);
       },
