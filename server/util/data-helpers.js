@@ -13,23 +13,23 @@ const knex = require('knex')({
 });
 
 const map_helpers = require('./data-helpers-maps')(knex);
-const user_helpers = require('./data-helpers-maps')(knex);
+const user_helpers = require('./data-helpers-users')(knex);
 let dataHelpers = map_helpers;
 
 module.exports = dataHelpers;
+
+
 
 //==============================================
 //            Test User Fuctionality
 //==============================================
 
 
-// ser_helpers.getUserById(1, console.log)
-// ser_helpers.getUserByUsername('Gaga', console.log)
-// ser_helpers.getUserByEmail('bri@gmail.com', console.log)
-// ser_helpers.getAllUsers(console.log)
+// user_helpers.getUserById(1, (err, res) => console.log(res))
+// user_helpers.getUserByUsername('Gaga', (err, res) => console.log(res))
+// user_helpers.getUserByEmail('bri@gmail.com', (err, res) => console.log(res))
+// user_helpers.getAllUsers((err, res) => console.log(res))
 
-
-// //----- Example User to Input ------
 // userData = {
 //   first_name: 'Bo',
 //   last_name: 'Bolast',
@@ -38,7 +38,7 @@ module.exports = dataHelpers;
 //   password: '123'
 // }
 
-// user_helpers.addUser(userData, console.log)
+// user_helpers.addUser(userData, (err, res) => console.log(res))
 
 
 //==============================================
@@ -46,12 +46,9 @@ module.exports = dataHelpers;
 //==============================================
 
 
-//map_helpers.getMap(3, console.log);
-//map_helpers.getMapPoints(1, console.log)
-//map_helpers.getPointImages(3, console.log)
-
-
-// //----- Example Map to Input ------
+// map_helpers.getMap(3, (err, res) => console.log(res))
+// map_helpers.getMapPoints(1, (err, res) => console.log(res))
+// map_helpers.getPointImages(3, (err, res) => console.log(res))
 
 // const mapData = {
 //     map: {
@@ -66,11 +63,11 @@ module.exports = dataHelpers;
 //     }
 //   }
 
-// map_helpers.addMap(mapData, console.log)
+// map_helpers.addMap(mapData, (err, res) => console.log(res))
 
-// map_helpers.getAllMaps(console.log)
+// map_helpers.getAllMaps((err, res) => console.log(res))
 
-//map_helpers.getPointById(1,console.log)
+// map_helpers.getPointById(1,(err, res) => console.log(res))
 
 // const pointData = {
 //     title: 'New Point',
@@ -80,5 +77,13 @@ module.exports = dataHelpers;
 //     map_id: 1
 // }
 
-// map_helpers.addPoint(pointData, console.log)
+// map_helpers.addPoint(pointData, (err, res) => console.log(res))
 
+
+
+// map_helpers.addMapFavourite(1, 2, (err, res) => console.log(res))
+// map_helpers.getMapFavourites(1, (err, res) => console.log(res))
+// map_helpers.deleteMapFavourite(1, 2, (err, res) => console.log(res))
+
+// map_helpers.addMapContributor(3, 2, (err, res) => console.log(res))
+// map_helpers.getMapContributors(3, (err, res) => console.log(res))
