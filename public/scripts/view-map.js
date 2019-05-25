@@ -11,6 +11,7 @@ const updatePointContainer = function(point){
   $('#point-container .img').attr("src",point.image_url);
   $('#edit-point').show();
   $('#delete-point').show();
+  $('#upload-img').show();
 }
 
 const clearPointContainer = function(point){
@@ -20,6 +21,7 @@ const clearPointContainer = function(point){
   $('#point-container .img').attr("src","");
   $('#edit-point').hide();
   $('#delete-point').hide();
+  $('#upload-img').hide();
 }
 
 const openPointEditForm = function(){
@@ -102,6 +104,7 @@ const {enableNewPointEvent, disableNewPointEvent} = function(){
       },
       disableNewPointEvent : function(){
         google.maps.event.removeListener(newPointListener);
+        newPointListener = null;
       }
 
   }
