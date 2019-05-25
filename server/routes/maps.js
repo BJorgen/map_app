@@ -3,30 +3,9 @@
 const express       = require('express');
 const mapsRoutes  = express.Router();
 
-const getMaps = require('./../util/mapObject');
-
-
-
-const getPoint = function (req, res){
-  let point;
-  for (let p of getMaps.points){
-    if(p.id === Number(req.params.point)){
-      point = p;
-    }
-  }
-  if(point){
-    res.status(200).json(point);
-  }
-  else{
-    res.status(404).send("not found");
-  }
-};
-
 const createMap = function (req, res){
   res.status(400).send();
 };
-
-
 
 const updatePoint = function (req, res){
   res.status(400).send();
@@ -52,6 +31,21 @@ const deleteFavorite = function (req, res){
   res.status(400).send();
 };
 
+//==============================================
+//         HELPER FUNCTIONS
+//==============================================
+
+const getSendJSOnonSuccess = function(res){
+  let  sendJSOnonSuccess = function(err, point){
+    if(err){
+      res.status(404).send();
+    }else{
+      res.json(point);
+    }  
+  }
+  return sendJSOnonSuccess
+}
+
 module.exports = function(DataHelpers) {
 
   mapsRoutes.get("/", function (req, res){
@@ -63,7 +57,6 @@ module.exports = function(DataHelpers) {
       }
     })
   });
-
 
   mapsRoutes.get("/:map", function (req, res){
     DataHelpers.getMap(req.params.map, function(err, map){
@@ -78,18 +71,19 @@ module.exports = function(DataHelpers) {
    });
 
   mapsRoutes.get("/:map/points",  function (req, res){
-    console.log("mapid",req.params.map);
-    const cb = function(err, points){
-      if(err){
-        res.status(404).send();
-      }else{
-        res.json(points);
-      }
-    }
-    DataHelpers.getMapPoints(req.params.map, cb);
+    DataHelpers.getMapPoints(req.params.map, getSendJSOnonSuccess(res));
   });
 
-  mapsRoutes.get("/:map/points/:point", getPoint);
+  mapsRoutes.get("/:map/points/:point", function (req, res){
+    const mapdId = req.params.map;
+    const pointdId = req.params.point;
+    if(! (mapdId && pointdId)){
+      res.status(400).send();
+    }
+    DataHelpers.getPointById(pointdId, getSendJSOnonSuccess(res));
+  });
+
+
   mapsRoutes.post("/", createMap);
   mapsRoutes.post("/:map/points", function (req, res){
     const params = {      
