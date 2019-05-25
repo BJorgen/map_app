@@ -43,8 +43,8 @@
           </div>          
           <img class="img"/>
         </div>
-        <button id="edit-point" class="right">Edit</button>
-        <button id="delete-point" class="right" onclick="deleteActivePoint()">Delete</button>
+        <button id="edit-point" onclick="openPointEditForm()"; class="right modify-point">Edit</button>
+        <button id="delete-point" class="right modify-point" onclick="deleteActivePoint()">Delete</button>
     </div>
   </div>
 
@@ -63,6 +63,27 @@
         <footer class="w3-container w3-teal">
           <button type="submit" class="btn">Submit</button>
           <button type="button" class="btn cancel" onclick="cancelAddNewPoint()">
+            Close
+          </button>
+          <output class="error"></output> 
+        </footer>
+      </div>
+    </form>
+
+    <form id="editPointFrom" action="/maps/:map/points" method="PUT"  class="w3-modal">
+      <div class="w3-modal-content w3-card-4">
+        <header class="w3-container w3-teal">
+          <span onclick="$('#editPointFrom').hide();" class="w3-button w3-display-topright">&times;</span>
+          <h2>Edit point settings </h2>
+        </header>
+        <label for="title"><b>Title</b></label>
+        <input type="text" placeholder="Enter point name" name="title" required>
+        <br/>
+        <label for="description"><b>Description</b></label>
+        <textarea name="description" placeholder="Optional"></textarea>
+        <footer class="w3-container w3-teal">
+          <button type="submit" class="btn">Submit</button>
+          <button type="button" class="btn cancel" onclick="$('#editPointFrom').hide();">
             Close
           </button>
           <output class="error"></output> 

@@ -7,10 +7,6 @@ const createMap = function (req, res){
   res.status(400).send();
 };
 
-const updatePoint = function (req, res){
-  res.status(400).send();
-};
-
 const uploadImg = function (req, res){
   res.status(400).send();
 };
@@ -103,7 +99,21 @@ module.exports = function(DataHelpers) {
     }
   });
 
-  mapsRoutes.post("/:map/points/:point", updatePoint);
+  mapsRoutes.put("/:map/points/:point", function (req, res){
+    const params = {      
+      description : req.body.description,
+      map_id : Number(req.params.map),
+      title : req.body.title
+    }
+    console.log(params);
+    if(!params.title  || ! params.map_id || ! req.params.point){
+      res.status(403).send();
+    }
+    else{
+      DataHelpers.getPointById(Number(req.params.point), getSendJSOnonSuccess(res));
+      //TODO use datahelper delete func
+    }
+  });
   mapsRoutes.post("/:map/points/:point/imgs", uploadImg);
   mapsRoutes.delete("/:map/points/:point/imgs/:img", deleteImg);
 
