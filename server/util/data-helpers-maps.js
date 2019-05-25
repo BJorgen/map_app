@@ -54,15 +54,16 @@ module.exports = function(knex){
 
 // ---- returns a list of map points/detail in an map -----
   function getMapPoints(mapId, cb) {
-    knex.select('points.*',{ image_id: 'images.id' }, {image_url : 'images.image_url'}).from('points')
-      .leftJoin('images','points.id','images.point_id')
-      .where('map_id', mapId)
-      .asCallback(function(err, mapPoints) {
-        if (err) {
-          throw err;
-        }
-        cb(null, mapPoints);
-      });
+    knex.select('points.*',{ image_id: 'images.id' }, {image_url : 'images.image_url'})
+    .from('points')
+    .leftJoin('images','points.id','images.point_id')
+    .where('map_id', mapId)
+    .asCallback(function(err, mapPoints) {
+      if (err) {
+        throw err;
+      }
+      cb(null, mapPoints);
+    });
   }
 
 //==============================================
@@ -70,7 +71,8 @@ module.exports = function(knex){
 //==============================================
 // ---- returns a list of all maps -----
   function getAllMaps(cb) {
-    knex.select('*').from('maps').asCallback((err, res) => {
+    knex.select('*').from('maps')
+    .asCallback((err, res) => {
       if (err) {
         throw err;
       }
@@ -118,14 +120,16 @@ module.exports = function(knex){
 //==============================================
 // ---- responds with point object -----
   function getPointById(pointId, cb) {
-    knex.select('*').from('points')
-      .where('id', pointId)
-      .asCallback(function(err, pointInfo) {
-        if (err) {
-          throw err;
-        }
-        cb(null, pointInfo[0]);
-      });
+    knex.select('points.*',{ image_id: 'images.id' }, {image_url : 'images.image_url'})
+    .from('points')
+    .leftJoin('images','points.id','images.point_id')
+    .where('points.id', pointId)
+    .asCallback(function(err, pointInfo) {
+      if (err) {
+        throw err;
+      }
+      cb(null, pointInfo[0]);
+    });
   }
 
 // ---- responds with point object -----
@@ -255,26 +259,28 @@ module.exports = function(knex){
 //==============================================
 // ---- responds with array of user favourite maps (map_id) -----
   function getUserFavourites (userId, cb) {
-    knex.select('*').from('favourites')
-    .where('user_id',userId)
+    knex.select({ map_id: 'favourites.map_id'} ,{map_name: 'maps.name'})
+    .from('favourites')
+    .join('maps','favourites.map_id','maps.id')
+    .where('favourites.user_id',userId)
     .asCallback((err, res) => {
       if (err) {
         throw err;
       }
-      mapsArray = res.map(x => x.map_id)
-      cb(null, mapsArray)
+      cb(null, res)
     });
   }
 // ---- responds with array of user contributed maps (map_id) -----
   function getUserContributions (userId, cb) {
-    knex.select('*').from('contributors')
-    .where('user_id',userId)
+    knex.select({ map_id: 'contributors.map_id'} ,{map_name: 'maps.name'})
+    .from('contributors')
+    .join('maps','contributors.map_id','maps.id')
+    .where('contributors.user_id',userId)
     .asCallback((err, res) => {
       if (err) {
         throw err;
       }
-      mapArray = res.map(x => x.map_id)
-      cb(null, mapsArray)
+      cb(null, res)
     });
   }
 
@@ -309,6 +315,8 @@ module.exports = function(knex){
     deleteMapFavourite,
     getMapContributors,
     addMapContributor,
+    getUserFavourites,
+    getUserContributions,
     getUserProfile
   }
 
