@@ -54,7 +54,7 @@ module.exports = function(knex){
 
 // ---- returns a list of map points/detail in an map -----
   function getMapPoints(mapId, cb) {
-    knex.select('*',{ image_id: 'images.id' }).from('points')
+    knex.select('points.*',{ image_id: 'images.id' }, {image_url : 'images.image_url'}).from('points')
       .innerJoin('images','points.id','images.point_id')
       .where('map_id', mapId)
       .asCallback(function(err, mapPoints) {
