@@ -22,6 +22,13 @@ const clearPointContainer = function(point){
   $('#delete-point').hide();
 }
 
+const openPointEditForm = function(){
+  console.log("desc",activePoint.description)
+  $('#editPointFrom input').val(activePoint.title);
+  $('#editPointFrom textarea').val(activePoint.description);
+  $('#editPointFrom').show();
+}
+
 const handleFlagClick = function(point){
   $.ajax(
     {
@@ -162,9 +169,39 @@ const bindAjaxOnSubmit = function(errorObj){
     this.querySelector('textarea').value = "";
     this.querySelector('input').value = "";
   });
+
+  $( "#editPointFrom" ).on( "submit", function( event ) {
+    event.preventDefault();
+    const pointData = {
+      title : this.querySelector('input').value,
+      description : this.querySelector('textarea').value,
+      longitude : Number($('#centerlong').html()),
+      latitude : Number($('#centerlat').html()),
+      map_id : map_id
+    }
+    $.ajax({
+      url : '/maps/'+map_id+'/points/'+activePoint.id,
+      method: 'PUT' ,
+      data :  pointData,
+      success: function(res){
+        //delete the old marker and create a new one
+        pointMap[activePoint.id].setMap(null);
+        delete pointMap[activePoint.id];
+        addPoint(res);
+        $('#editPointFrom').hide();
+        updatePointContainer(res);
+      },
+      error: function(req, textStatus, errorThrown) {
+        console.log("error", errorThrown);
+        alert("you have left the happy path")
+      }
+    });
+  });
+
 }
 
 $( document ).ready(function() {
+  $('.modify-point').hide();
   $('.popups').hide();
   bindAjaxOnSubmit();
 });
