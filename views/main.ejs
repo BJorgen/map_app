@@ -1,20 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <link rel="stylesheet" href="styles/style.css" type="text/css" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>MappApp</title>
+    <title>MapApp - Main</title>
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">  
     <!-- External JS -->
     <script type="text/javascript" src="/vendor/jquery-2.2.3.min.js"></script>
-    <!-- internal script --> 
-    <title>Main page</title>
+    
 </head>
+
 <body>
   <% include partials/_header %>
-  MAPS
+  
+  <!-- create map tiles to choose from --> 
+  <% maps.forEach(function(map){ %>
+    <% link = '/maps/'+ map.id %>
+    <a href = <%=link%> >
+      <div class='map-tile' onclick=''> 
+        <%=map.name%>
+      </div>
+    </a>
+  <% }) %>
+
 </body>
 </html>
