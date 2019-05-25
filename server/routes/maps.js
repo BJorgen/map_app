@@ -15,13 +15,6 @@ const deleteImg = function (req, res){
   res.status(400).send();
 };
 
-const createFavorite = function (req, res){
-  res.status(400).send();
-};
-
-const deleteFavorite = function (req, res){
-  res.status(400).send();
-};
 
 //==============================================
 //         HELPER FUNCTIONS
@@ -75,8 +68,6 @@ module.exports = function(DataHelpers) {
     DataHelpers.getPointById(pointdId, getSendJSOnonSuccess(res));
   });
 
-
-  mapsRoutes.post("/", createMap);
   mapsRoutes.post("/:map/points", function (req, res){
     const params = {      
       description : req.body.description,
@@ -113,8 +104,6 @@ module.exports = function(DataHelpers) {
       DataHelpers.editPointById(Number(req.params.point), params, getSendJSOnonSuccess(res));
     }
   });
-  mapsRoutes.post("/:map/points/:point/imgs", uploadImg);
-  mapsRoutes.delete("/:map/points/:point/imgs/:img", deleteImg);
 
   mapsRoutes.delete("/:map/points/:point", function (req, res){
     const pointdId = req.params.point;
@@ -133,8 +122,18 @@ module.exports = function(DataHelpers) {
     })
   });
 
-  mapsRoutes.post("/:map/favorite", createFavorite);
-  mapsRoutes.delete("/:map/favorite", deleteFavorite);
+  mapsRoutes.post("/:map/favorite", function (req, res){
+    res.status(400).send();
+  });
+
+  mapsRoutes.delete("/:map/favorite", function (req, res){
+    res.status(400).send();
+  });
+
+
+  mapsRoutes.post("/:map/points/:point/imgs", uploadImg);
+  mapsRoutes.delete("/:map/points/:point/imgs/:img", deleteImg);
+  mapsRoutes.post("/", createMap);
 
   return mapsRoutes;
 };
