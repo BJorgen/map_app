@@ -38,7 +38,7 @@ module.exports = function(knex){
 
 
 //==============================================
-//         GET map POINTS with IMAGES
+//         GET ADD DELETE map POINTS with IMAGES
 //==============================================
 
   function getPointImages(pointId, cb) {
@@ -49,6 +49,28 @@ module.exports = function(knex){
         throw err;
       }
       cb(null, pointImages);
+    });
+  }
+
+  function updatePointImage(point_id, url, cb ){
+    deletePointImages(point_id, addPointImage(point_id, url, cb));
+  }
+
+  function deletePointImages(point_id, cb) {
+    knex('images')
+    .where('point_id', point_id)
+    .del()
+    .asCallback(cb);
+  }
+
+  function addPointImage(point_id, url, cb) {
+    knex('images').insert({image_url : url, point_id : point_id})
+    .returning('id')
+    .asCallback((err, res)=> {
+      if (err) {
+        throw err;
+      }
+    cb(null, res[0]);
     });
   }
 
@@ -317,7 +339,8 @@ module.exports = function(knex){
     addMapContributor,
     getUserFavourites,
     getUserContributions,
-    getUserProfile
+    getUserProfile,
+    updatePointImage
   }
 
 }

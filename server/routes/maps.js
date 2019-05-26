@@ -7,10 +7,6 @@ const createMap = function (req, res){
   res.status(400).send();
 };
 
-const uploadImg = function (req, res){
-  res.status(400).send();
-};
-
 const deleteImg = function (req, res){
   res.status(400).send();
 };
@@ -131,7 +127,15 @@ module.exports = function(DataHelpers) {
   });
 
 
-  mapsRoutes.post("/:map/points/:point/imgs", uploadImg);
+  mapsRoutes.put("/:map/points/:point/imgs", function (req, res){
+    const pointdId = Number(req.params.point);
+    const url = req.body.url;
+    if( ! (pointdId && url)){
+      res.status(400).send();
+    }
+    DataHelpers.updatePointImage(pointdId, url, getSendJSOnonSuccess(res));
+  });
+
   mapsRoutes.delete("/:map/points/:point/imgs/:img", deleteImg);
   mapsRoutes.post("/", createMap);
 

@@ -25,7 +25,6 @@ const clearPointContainer = function(point){
 }
 
 const openPointEditForm = function(){
-  console.log("desc",activePoint.description)
   $('#editPointFrom input').val(activePoint.title);
   $('#editPointFrom textarea').val(activePoint.description);
   $('#editPointFrom').show();
@@ -54,7 +53,6 @@ const getGoogleMarker = function(coord){
 }
 
 const deleteActivePoint = function(){
-  console.log(pointMap[activePoint.id]);
   $.ajax(
     {
       url: '/maps/'+map_id+'/points/'+activePoint.id,
@@ -206,6 +204,27 @@ const bindAjaxOnSubmit = function(errorObj){
     });
   });
 
+  $( "#uploadImg" ).on( "submit", function( event ) {
+    event.preventDefault();
+    const pointData = {
+      url : this.querySelector('input').value,
+      map_id : map_id
+    }
+    $.ajax({
+      url : '/maps/'+map_id+'/points/'+activePoint.id + '/imgs',
+      method: 'PUT' ,
+      data :  pointData,
+      success: function(res){
+        activePoint.image_url = pointData.url;
+        updatePointContainer(activePoint);
+        $('#uploadImg').hide();
+      },
+      error: function(req, textStatus, errorThrown) {
+        console.log("error", errorThrown);
+        alert("you have left the happy path")
+      }
+    });
+  });
 }
 
 $( document ).ready(function() {
