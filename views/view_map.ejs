@@ -19,15 +19,15 @@
 </head>
 <body>
   <%- include('partials/_header', {user_name: user_name}); %>
-  <label id='centerlong' class="datacontainer"> <%= settings.center_long %> </label>
-  <label id='centerlat' class="datacontainer"> <%= settings.center_lat %> </label>
-  <label id='mapid' class="datacontainer"> <%= id %> </label>
+  <label id='centerlong' class="datacontainer"> <%= map.settings.center_long %> </label>
+  <label id='centerlat' class="datacontainer"> <%= map.settings.center_lat %> </label>
+  <label id='mapid' class="datacontainer"> <%= map.id %> </label>
                                                                                                                                                                           
   <div clas="container">
       <div class="row-container row">
           <div class=" col-7">
             <div>
-              <h2>Map name : <%= name %></h2> 
+              <h2>Map name : <%= map.name %></h2> 
                 <button id="toggleEditBtn" class="right" onclick="enableNewPointEvent()">Add New Point</button>
                 <button class="right" >Like</button>
               </div>                               
