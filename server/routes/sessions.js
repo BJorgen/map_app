@@ -3,25 +3,37 @@
 const express       = require('express');
 const sessionsRoutes  = express.Router();
 
+module.exports = function(DataHelpers) {
 
 const get_new = function (req, res){
   res.render('login');
 };
 
 const post = function (req, res){
-  if ( ! req.body.user_name){
-    res.status(403).send();
+  const email = req.body.email;
+  const password = req.body.password; 
+  if ( ! email || ! password){
+    res.status(400).send();
     return;
   }else{
-    res.status(200).send();
+    DataHelpers.getUserByEmail(email,function(err,user){
+      if(err){
+        console.log(err);
+        res.status(500).send();
+      }if( ! user){
+        res.status(403).send();
+      }else{
+        req.session.user_name = user.username;
+        req.session.id = user.id;
+        res.redirect('/maps');
+      }
+    })
   }
 };
 
 const deleteSession = function (req, res){
   res.status(200).send();
 };
-
-module.exports = function(DataHelpers) {
 
   sessionsRoutes.get("/new", get_new);
   sessionsRoutes.post("/", post);

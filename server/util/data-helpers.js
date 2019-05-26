@@ -14,7 +14,7 @@ const knex = require('knex')({
 
 const map_helpers = require('./data-helpers-maps')(knex);
 const user_helpers = require('./data-helpers-users')(knex);
-let dataHelpers = map_helpers;
+let dataHelpers = Object.assign(map_helpers, user_helpers);
 
 module.exports = dataHelpers;
 
