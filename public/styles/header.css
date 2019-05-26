@@ -25,3 +25,38 @@
     float: left;
 }
 
+.bottom-container{
+    height: 300px;
+    background-color: #565555;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.name {
+    margin-top: 10px;
+    margin-left: 20px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+}
+.info{
+    
+    margin-top: 10px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    margin-left: 20px
+
+    
+}
+.image1{
+    float:left; 
+    
+}
+.image2{
+    float: left;
+    
+}
+.image3{
+    float: left;
+
+}
+
+
