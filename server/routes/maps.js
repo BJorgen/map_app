@@ -27,6 +27,14 @@ const getSendJSOnonSuccess = function(res){
   return sendJSOnonSuccess
 }
 
+const isAuthorized = function(req){
+  let userID = req.session.user_id;
+  let userName = req.session.user_name;
+  return (userID && userName);
+}
+//==============================================
+//         MAPS ROUTES
+//==============================================
 module.exports = function(DataHelpers) {
 
   mapsRoutes.get("/", function (req, res){
@@ -34,7 +42,7 @@ module.exports = function(DataHelpers) {
       if(err){
         res.status(500).send();
       }else{
-        res.render('main',{maps});
+       res.render('main',{maps, user_name : (req.session.user_name ? req.session.user_name :  "")});
       }
     })
   });
@@ -46,7 +54,7 @@ module.exports = function(DataHelpers) {
       }else if(! map){
         res.status(404).send();
       }else{
-        res.render('view_map', map);
+        res.render('view_map',{map, user_name : (req.session.user_name ? req.session.user_name :  "") });
       }
     });
    });

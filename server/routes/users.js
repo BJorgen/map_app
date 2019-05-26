@@ -14,7 +14,7 @@ module.exports = function(dataHelpers) {
       if(err){
         res.status(500).send();
       }else{
-        res.render('profile',{profile});
+        res.render('profile',{profile, user_name : (req.session.user_name ? req.session.user_name :  "")});
       }
     });
   }

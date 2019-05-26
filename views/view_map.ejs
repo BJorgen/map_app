@@ -18,7 +18,7 @@
     <title>Main page</title>
 </head>
 <body>
-  <% include partials/_header %>
+  <%- include('partials/_header', {user_name: user_name}); %>
   <label id='centerlong' class="datacontainer"> <%= settings.center_long %> </label>
   <label id='centerlat' class="datacontainer"> <%= settings.center_lat %> </label>
   <label id='mapid' class="datacontainer"> <%= id %> </label>
