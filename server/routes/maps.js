@@ -126,14 +126,38 @@ module.exports = function(DataHelpers) {
     })
   });
 
-  mapsRoutes.post("/:map/favorite", function (req, res){
-    res.status(400).send();
-  });
+//==============================================
+//       ADD and DELETE MAPS FAVOURITES
+//==============================================
+  const addMapFavourite = function (req, res){
+    console.log('ADD Favourite', 'user_id: ', req.session.user_id,'map_id:',req.params.map)
+    DataHelpers.addMapFavourite(req.session.user_id, req.params.map, function(err, listOfFavourites){
+      if(err){
+        res.status(500).send();
+      }else{
+        // Need to edit this to send ajax update to page
+        res.status(200).json(listOfFavourites);
+        // ------
+      }
+    });
+  }
 
-  mapsRoutes.delete("/:map/favorite", function (req, res){
-    res.status(400).send();
-  });
+  const deleteMapFavourite = function (req, res){
+    console.log('DELETE Favourite', 'user_id:',req.session.user_id,'map_id:',req.params.map)
+    DataHelpers.deleteMapFavourite(req.session.user_id, req.params.map, function(err, listOfFavourites){
+      if(err){
+        res.status(500).send();
+      }else{
+        // Need to edit this to send ajax update to page
+        res.status(200).json(listOfFavourites);
+        // ------
+      }
+    });
+  }
 
+  mapsRoutes.post("/:map/favourite", addMapFavourite);
+  mapsRoutes.delete("/:map/favourite", deleteMapFavourite);
+//==============================================
 
   mapsRoutes.put("/:map/points/:point/imgs", function (req, res){
     const pointdId = Number(req.params.point);

@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">  
     <!-- External JS -->
     <script type="text/javascript" src="/vendor/jquery-2.2.3.min.js"></script>
+    <!-- internal script --> 
+    <script type="text/javascript" src="/scripts/map-favourites.js"></script> 
     
 </head>
 
@@ -29,7 +31,7 @@
       <% profile.favourites.forEach(function(map){ %>
         <% link = '/maps/'+ map.map_id %>
 
-        <div class="card">
+        <div class="card" style="max-width: 18rem;">
           <img class="card-img-top" src="https://maps.twomoons.de/styles/klokantech-basic/13/2817/4944.png" alt="Card image cap">
           <div class="card-body">
             <h5 class="card-title"><%=map.name%></h5>
@@ -59,7 +61,7 @@
       <% profile.contributions.forEach(function(map){ %>
         <% link = '/maps/'+ map.map_id %>
 
-        <div class="card">
+        <div class="card" style="max-width: 18rem;">
           <img class="card-img-top" src="https://maps.twomoons.de/styles/klokantech-basic/13/2817/4944.png" alt="Card image cap">
           <div class="card-body">
             <h5 class="card-title"><%=map.name%></h5>
