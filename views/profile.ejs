@@ -19,46 +19,61 @@
   <% include partials/_header %>
   
   <!-- create map tiles for user favourites --> 
-  <div class ='maps-container'>
+  <div class ='favourites-container'>
 
     <div>
       <h4>Favourites</h4>
     </div>
-    <% profile.favourites.forEach(function(map){ %>
-      <% link = '/maps/'+ map.map_id %>
 
-        <div class="card" style="width: 18rem;">
+    <div class ='card-deck' style='margin:20px'>
+
+      <% profile.favourites.forEach(function(map){ %>
+        <% link = '/maps/'+ map.map_id %>
+
+        <div class="card">
           <img class="card-img-top" src="https://maps.twomoons.de/styles/klokantech-basic/13/2817/4944.png" alt="Card image cap">
           <div class="card-body">
             <h5 class="card-title"><%=map.name%></h5>
             <p class="card-text">Some information about the map goes here!</p>
+          </div>
+          <div class="card-footer">
             <a href=<%=link%> class="btn btn-primary">View</a>
+            <small class="text-muted">Last updated 3 mins ago</small>
           </div>
         </div>
 
-    <% }) %>
+      <% }) %>
+
+    </div>
 
   </div>
 
     <!-- create map tiles for user contributions --> 
-  <div class ='maps-container'>
+  <div class ='contributions-container'>
 
     <div>
       <h4>Contributions</h4>
     </div>
-    <% profile.contributions.forEach(function(map){ %>
-      <% link = '/maps/'+ map.map_id %>
 
-        <div class="card" style="width: 18rem;">
+    <div class ='card-deck' style='margin:20px'>
+
+      <% profile.contributions.forEach(function(map){ %>
+        <% link = '/maps/'+ map.map_id %>
+
+        <div class="card">
           <img class="card-img-top" src="https://maps.twomoons.de/styles/klokantech-basic/13/2817/4944.png" alt="Card image cap">
           <div class="card-body">
             <h5 class="card-title"><%=map.name%></h5>
             <p class="card-text">Some information about the map goes here!</p>
+          </div>
+          <div class="card-footer">
             <a href=<%=link%> class="btn btn-primary">View</a>
+            <small class="text-muted">Last updated 3 mins ago</small>
           </div>
         </div>
 
-    <% }) %>
+      <% }) %>
+    </div>
 
   </div>
 

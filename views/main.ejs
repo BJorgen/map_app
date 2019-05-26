@@ -18,20 +18,26 @@
 <body>
   <% include partials/_header %>
   
-  <!-- create map tiles to choose from -->
-   <div class ='maps-container'>
+  <!-- create map tiles for each map-->
+
+   <div class ='card-deck' style='margin:20px'>
 
     <% maps.forEach(function(map){ %>
       <% link = '/maps/'+ map.id %>
 
-        <div class="card" style="width: 18rem;">
+        <div class="card">
           <img class="card-img-top" src="https://maps.twomoons.de/styles/klokantech-basic/13/2817/4944.png" alt="Card image cap">
           <div class="card-body">
             <h5 class="card-title"><%=map.name%></h5>
             <p class="card-text">Some information about the map goes here!</p>
-            <a href=<%=link%> class="btn btn-primary">View</a>
+          </div>
+          <div class="card-footer">
+            <!<a href=<%=link%> class="btn btn-primary">View map</a>>
+            <a href="<%=link%>" class="badge badge-light">View map</a>
+            <small class="text-muted">Last updated 3 mins ago</small>
           </div>
         </div>
+
 
     <% }) %>
 
@@ -39,3 +45,5 @@
 
 </body>
 </html>
+
+
