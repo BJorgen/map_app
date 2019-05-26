@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <%# <link rel="stylesheet" href="styles/style.css" type="text/css" /> %>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>MapApp - Profile</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">  
+    <!-- External JS -->
+    <script type="text/javascript" src="/vendor/jquery-2.2.3.min.js"></script>
+    
+</head>
+
+<body>
+  <% include partials/_header %>
+  
+  <!-- create map tiles for user favourites --> 
+  <div class ='maps-container'>
+
+    <div>
+      <h4>Favourites</h4>
+    </div>
+    <% profile.favourites.forEach(function(map){ %>
+      <% link = '/maps/'+ map.map_id %>
+
+        <div class="card" style="width: 18rem;">
+          <img class="card-img-top" src="https://maps.twomoons.de/styles/klokantech-basic/13/2817/4944.png" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title"><%=map.name%></h5>
+            <p class="card-text">Some information about the map goes here!</p>
+            <a href=<%=link%> class="btn btn-primary">View</a>
+          </div>
+        </div>
+
+    <% }) %>
+
+  </div>
+
+    <!-- create map tiles for user contributions --> 
+  <div class ='maps-container'>
+
+    <div>
+      <h4>Contributions</h4>
+    </div>
+    <% profile.contributions.forEach(function(map){ %>
+      <% link = '/maps/'+ map.map_id %>
+
+        <div class="card" style="width: 18rem;">
+          <img class="card-img-top" src="https://maps.twomoons.de/styles/klokantech-basic/13/2817/4944.png" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title"><%=map.name%></h5>
+            <p class="card-text">Some information about the map goes here!</p>
+            <a href=<%=link%> class="btn btn-primary">View</a>
+          </div>
+        </div>
+
+    <% }) %>
+
+  </div>
+
+
+</body>
+</html>
