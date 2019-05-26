@@ -1,14 +1,40 @@
 "use strict";
 
-const express       = require('express');
-const usersRoutes  = express.Router();
+const express = require('express');
+const usersRoutes = express.Router();
 
-const getProfile = function (req, res){
-  res.status(400).send();
-};
+module.exports = function(dataHelpers) {
 
-module.exports = function(DataHelpers) {
+//==============================================
+//              HELPER FUNCTIONS
+//==============================================
+
+  const getProfile = function (req, res){
+    dataHelpers.getUserProfile(req.params.user,function(err, profile){
+      if(err){
+        res.status(500).send();
+      }else{
+        res.render('profile',{profile});
+      }
+    });
+  }
+
+  const getProfileJSON = function (req, res){
+    dataHelpers.getUserProfile(req.params.user,function(err, profile){
+      if(err){
+        res.status(500).send();
+      }else{
+        res.send(JSON.stringify(profile));
+      }
+    });
+  }
+
+//==============================================
+//                 USER ROUTES
+//==============================================
+
   usersRoutes.get("/:user", getProfile);
-
+  usersRoutes.get("/:user/JSON", getProfileJSON);
   return usersRoutes;
+
 };

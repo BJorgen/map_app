@@ -1,9 +1,30 @@
-        <nav id="nav-bar">
-                <img class="logo" width="70px" height="70px"src="https://cdn2.iconfinder.com/data/icons/scenarium-vol-5/128/016_map_location_travel_navigation_city_street_road-512.png">
-                <img class="logoRight" width="70px" height="70px"src="https://cdn2.iconfinder.com/data/icons/scenarium-vol-5/128/016_map_location_travel_navigation_city_street_road-512.png">
-                <span class="header">MAP📱PP</span>
-                <button type='button' class="button1 btn btn-outline-dark">create map</button>
-                <button type='button' class="button2 btn btn-outline-dark">login </button>
-                <button type='button' class="button3 btn btn-outline-dark">browse</button>
-          <!--The div element for the map -->
-          </nav>
+<nav class='navbar navbar-expand-lg navbar-light bg-light'>
+  <a class='navbar-brand mb-0 h1' href='/maps'>MAP APP</a>
+
+  <button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation'>
+    <span class='navbar-toggler-icon'></span>
+  </button>
+
+  <div class='collapse navbar-collapse' id='navbarSupportedContent'>
+    <ul class='navbar-nav mr-auto'>
+      <li class='nav-item active'>
+        <a class='nav-link' href='/maps'> browse <span class='sr-only'>(current)</span></a>
+      </li>
+      <li class='nav-item'>
+        <a class='nav-link disabled' href='/users:profile'>profile</a>
+      </li>
+      <li class='nav-item'>
+        <a class='nav-link disabled' href='/users/login'>create map</a>
+      </li>
+    </ul>
+    <a href='/sessions/new'>
+      <button class='btn btn-outline-success my-2 my-sm-0'>Login</button>
+    </a>
+  </div>
+</nav>
+
+
+<%# 
+Nav bar modified from starter code. 
+Souce: https://coreui.io/docs/components/navbar/ 
+%>

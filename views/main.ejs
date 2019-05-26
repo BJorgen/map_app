@@ -18,15 +18,24 @@
 <body>
   <% include partials/_header %>
   
-  <!-- create map tiles to choose from --> 
-  <% maps.forEach(function(map){ %>
-    <% link = '/maps/'+ map.id %>
-    <a href = <%=link%> >
-      <div class='map-tile' onclick=''> 
-        <%=map.name%>
-      </div>
-    </a>
-  <% }) %>
+  <!-- create map tiles to choose from -->
+   <div class ='maps-container'>
+
+    <% maps.forEach(function(map){ %>
+      <% link = '/maps/'+ map.id %>
+
+        <div class="card" style="width: 18rem;">
+          <img class="card-img-top" src="https://maps.twomoons.de/styles/klokantech-basic/13/2817/4944.png" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title"><%=map.name%></h5>
+            <p class="card-text">Some information about the map goes here!</p>
+            <a href=<%=link%> class="btn btn-primary">View</a>
+          </div>
+        </div>
+
+    <% }) %>
+
+  </div>
 
 </body>
 </html>
