@@ -49,7 +49,3 @@ $(document).ready(function() {
   $('.map_favourites .fa-heart').on('click', toggleFavourite)
 });
 
-
-
-// mapsRoutes.post("/:map/favorite", addMapFavourite);
-// mapsRoutes.delete("/:map/favorite", deleteMapFavourite);
