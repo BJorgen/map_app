@@ -1,4 +1,10 @@
 .favourite {
   color: red;
+  font-size: 120%;
+}
+
+.contributor {
+  color: green;
+  font-size: 120%;
 }
 /*# sourceMappingURL=favourites.css.map */

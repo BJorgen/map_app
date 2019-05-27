@@ -143,7 +143,6 @@ module.exports = function(DataHelpers) {
 //       ADD and DELETE MAPS FAVOURITES
 //==============================================
   const addMapFavourite = function (req, res){
-    console.log('ADD Favourite', 'user_id: ', req.session.user_id,'map_id:',req.params.map)
     DataHelpers.addMapFavourite(req.session.user_id, req.params.map, function(err, listOfFavourites){
       if(err){
         res.status(500).send();
@@ -154,7 +153,6 @@ module.exports = function(DataHelpers) {
   }
 
   const deleteMapFavourite = function (req, res){
-    console.log('DELETE Favourite', 'user_id:',req.session.user_id,'map_id:',req.params.map)
     DataHelpers.deleteMapFavourite(req.session.user_id, req.params.map, function(err, listOfFavourites){
       if(err){
         res.status(500).send();

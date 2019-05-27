@@ -1,5 +1,6 @@
 
 <% const isFavourite =  profile&&profile.favourites.map(a=>a.id).includes(map.id) ? 'favourite' : ''%>
+<% const isContributor =  profile&&profile.contributions.map(a=>a.id).includes(map.id) ? 'contributor' : ''%>
 
 <% const link = '/maps/'+ map.id %>
 
@@ -13,7 +14,7 @@
     <div class="card-footer">
       <small class="text-muted">Last updated 3 mins ago
         <div class="map_contributors">
-            <i class="fa fa-users"></i> 17  
+            <i class="fa fa-users <%=isContributor%>"></i> 17  
         </div>
         <div class="map_favourites">
             <i class="fa fa-heart <%=isFavourite%>" data-map-id="<%=map.id%>"></i> 253
