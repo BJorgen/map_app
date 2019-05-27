@@ -2,8 +2,8 @@
     "version": 3,
     "mappings": "AAAA,AAAA,UAAU,CAAC;EACT,KAAK,EAAC,GACR;CAAC",
     "sources": [
-        "main_page.scss"
+        "favourites.scss"
     ],
     "names": [],
-    "file": "main_page.css"
+    "file": "favourites.css"
 }
