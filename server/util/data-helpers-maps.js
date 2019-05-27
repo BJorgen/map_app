@@ -281,7 +281,7 @@ module.exports = function(knex){
 //==============================================
 // ---- responds with array of user favourite maps (map_id) -----
   function getUserFavourites (userId, cb) {
-    knex.select({ map_id: 'favourites.map_id'} ,{map_name: 'maps.name'})
+    knex.select({ id: 'favourites.map_id'} ,{name: 'maps.name'})
     .from('favourites')
     .join('maps','favourites.map_id','maps.id')
     .where('favourites.user_id',userId)
@@ -294,7 +294,7 @@ module.exports = function(knex){
   }
 // ---- responds with array of user contributed maps (map_id) -----
   function getUserContributions (userId, cb) {
-    knex.select({ map_id: 'contributors.map_id'} ,{map_name: 'maps.name'})
+    knex.select({ id: 'contributors.map_id'} ,{name: 'maps.name'})
     .from('contributors')
     .join('maps','contributors.map_id','maps.id')
     .where('contributors.user_id',userId)

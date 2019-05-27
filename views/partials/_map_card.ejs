@@ -1,5 +1,5 @@
 
-<% const isFavourite =  profile&&profile.favourites.map(a=>a.map_id).includes(map.id) ? 'favourite' : ''%>
+<% const isFavourite =  profile&&profile.favourites.map(a=>a.id).includes(map.id) ? 'favourite' : ''%>
 
 <% const link = '/maps/'+ map.id %>
 
