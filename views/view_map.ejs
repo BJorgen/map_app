@@ -19,6 +19,8 @@
 </head>
 <body>
   <%- include('partials/_header', {user_name: user_name}); %>
+  <% const disabled =  user_name ? '' : 'disabled' %>
+
   <label id='centerlong' class="datacontainer"> <%= map.settings.center_long %> </label>
   <label id='centerlat' class="datacontainer"> <%= map.settings.center_lat %> </label>
   <label id='mapid' class="datacontainer"> <%= map.id %> </label>
@@ -28,8 +30,9 @@
           <div class=" col-7">
             <div>
               <h2> <%= map.name %></h2> 
-              <button id="toggleEditBtn" class="btn btn-primary right" onclick="enableNewPointEvent()">Add New Point</button>
-              <button class="btn btn-primary right" >Like</button>
+              <button id="toggleEditBtn" class="btn btn-primary right" onclick="enableNewPointEvent()" <%= disabled %>>
+                Add New Point</button>
+              <button class="btn btn-primary right" <%= disabled %> >Like</button>
             </div>                               
             <div id="map">
             <img class="" width="70px" height="70px"src="https://cdn2.iconfinder.com/data/icons/scenarium-vol-5/128/016_map_location_travel_navigation_city_street_road-512.png">
@@ -43,9 +46,9 @@
           </div>          
           <img class="img"/>
         </div>
-        <button id="delete-point" class="btn btn-danger right modify-point" onclick="deleteActivePoint()">Delete</button>
-        <button id="edit-point" onclick="openPointEditForm()"; class="btn btn-primary right modify-point">Edit</button>
-        <button id="upload-img" onclick="$('#uploadImg').show()"; class="btn btn-primary right modify-point">Upload image</button>
+        <button <%= disabled %> id="delete-point" class="btn btn-danger right modify-point" onclick="deleteActivePoint()">Delete</button>
+        <button <%= disabled %> id="edit-point" onclick="openPointEditForm()"; class="btn btn-primary right modify-point">Edit</button>
+        <button <%= disabled %> id="upload-img" onclick="$('#uploadImg').show()"; class="btn btn-primary right modify-point">Upload image</button>
         
     </div>
   </div>
