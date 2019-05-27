@@ -72,7 +72,7 @@ const deleteActivePoint = function(){
 const addPoint = function(point) {
   let marker = getGoogleMarker({lng : Number(point.longitude), lat : Number(point.latitude)});
   var infowindow = new google.maps.InfoWindow({
-    content: `<div><button onclick=handleFlagClick(${point.id})>View</button>${point.title}</div>`
+    content: `<div><button class="btn-link" onclick=handleFlagClick(${point.id})>${point.title}</button></div>`
   });
  marker.addListener('click', function () {
     infowindow.open(map, marker);

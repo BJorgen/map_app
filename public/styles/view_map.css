@@ -8,11 +8,19 @@
     display: none;
 }
 
+#map-container{
+  margin: 1vw;
+}
+
 h2 {
   text-align: center;
   justify-content: center;
+  display: inline-block;
 }
 
+.btn {
+  margin: 3px;
+}
 /* point view*/
 
 .img {

@@ -23,15 +23,15 @@
   <label id='centerlat' class="datacontainer"> <%= map.settings.center_lat %> </label>
   <label id='mapid' class="datacontainer"> <%= map.id %> </label>
                                                                                                                                                                           
-  <div clas="container">
+  <div clas="container" id= "map-container">
       <div class="row-container row">
           <div class=" col-7">
             <div>
-              <h2>Map name : <%= map.name %></h2> 
-                <button id="toggleEditBtn" class="right" onclick="enableNewPointEvent()">Add New Point</button>
-                <button class="right" >Like</button>
-              </div>                               
-              <div id="map">
+              <h2> <%= map.name %></h2> 
+              <button id="toggleEditBtn" class="btn btn-primary right" onclick="enableNewPointEvent()">Add New Point</button>
+              <button class="btn btn-primary right" >Like</button>
+            </div>                               
+            <div id="map">
             <img class="" width="70px" height="70px"src="https://cdn2.iconfinder.com/data/icons/scenarium-vol-5/128/016_map_location_travel_navigation_city_street_road-512.png">
           </div>
         </div>
@@ -43,9 +43,9 @@
           </div>          
           <img class="img"/>
         </div>
-        <button id="delete-point" class="right modify-point" onclick="deleteActivePoint()">Delete</button>
-        <button id="edit-point" onclick="openPointEditForm()"; class="right modify-point">Edit</button>
-        <button id="upload-img" onclick="$('#uploadImg').show()"; class="right modify-point">Upload image</button>
+        <button id="delete-point" class="btn btn-danger right modify-point" onclick="deleteActivePoint()">Delete</button>
+        <button id="edit-point" onclick="openPointEditForm()"; class="btn btn-primary right modify-point">Edit</button>
+        <button id="upload-img" onclick="$('#uploadImg').show()"; class="btn btn-primary right modify-point">Upload image</button>
         
     </div>
   </div>
