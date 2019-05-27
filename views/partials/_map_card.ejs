@@ -1,5 +1,5 @@
-<% console.log('MAP',map)%>
-<% console.log('PROFILE',profile)%>
+
+<% const isFavourite =  profile&&profile.favourites.map(a=>a.map_id).includes(map.id) ? 'favourite' : ''%>
 
 <% const link = '/maps/'+ map.id %>
 
@@ -16,7 +16,7 @@
             <i class="fa fa-users"></i> 17  
         </div>
         <div class="map_favourites">
-            <i class="fa fa-heart" data-map-id="<%=map.id%>"></i> 253
+            <i class="fa fa-heart <%=isFavourite%>" data-map-id="<%=map.id%>"></i> 253
         </div>
       </small>
     </div>
