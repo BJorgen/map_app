@@ -320,8 +320,6 @@ module.exports = function(knex){
     });
   }
 
-
-
   return { 
     getMap, 
     getPointImages, 

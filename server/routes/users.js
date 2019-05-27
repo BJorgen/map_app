@@ -10,7 +10,6 @@ module.exports = function(dataHelpers) {
 //==============================================
 
   const getProfile = function (req, res){
-    console.log("yes I am here")
     if( ! req.session.user_id){
       res.status(403).send("Wrong credentials");
       return;

@@ -28,29 +28,23 @@
 <body>
   <%- include('partials/_header', {user_name: user_name}); %>
   <p id="demo"></p>
-  <form id="new-map" action="/maps/" method="POST" >
-    <div class="w3-modal-content w3-card-4">
-      <header class="w3-container w3-teal">
-        <h2>Create new map</h2>
-      </header>
-      <label for="name"><b>Name</b></label>
-      <input type="text" placeholder="Map name" name="name" required>
-      <br />
-      <label for="center_long"><b>Longitude</b></label>
-      <input id="center_long" name="center_long"></input>
-      <br />
-      <label for="center_lat"><b>Latitude</b></label>
-      <input id="center_lat" name="center_lat"></input>
-      <br />
-      <footer class="w3-container w3-teal">
-        <button type="button" onclick="getLocation()">Add your location</button>
-        <button type="submit" class="btn">Create</button>
-        <output class="error"></output>
-      </footer>
-    </div>
-  </form>
 
- 
+  <div style='max-width:400px; margin:auto; padding:20px'>
+    <form id="new-map" action="/maps/" method="POST" class="form-signin">
+      <h1 class="h3 mb-3 font-weight-normal">Create new map</h1>
+      <label for="name"><h4><b>Name</b></h4></label>
+      <input type="text" class="form-control" placeholder="Map name" name="name" required>
+      </br>
+      <label for="name"><h4><b>Location</b></h4></label>
+      <button type="button" class="btn btn-outline-secondary btn-block" onclick="getLocation()" style='margin-bottom:10px;'>Add your location</button>
+      <label for="center_long">Longitude:</label>
+      <input id="center_long" class="form-control" name="center_long" required></input>
+      <label for="center_lat">Latitude:</label>
+      <input id="center_lat" class="form-control" name="center_lat" required></input>
+      <button type="submit" class="btn btn-lg btn-primary btn-block" style='margin-top:20px;'>Create Map</button>
+      <output class="error"></output>
+    </form>
+  <div>
 
   <script>
       const lat = document.getElementById("center_lat");
