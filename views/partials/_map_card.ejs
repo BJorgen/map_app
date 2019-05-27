@@ -1,0 +1,25 @@
+<% console.log('my-profile-from_map_card',profile) %>
+
+<% const isFavourite = profile.favourites.map(a=>a.map_id).includes.(map.id)%>
+console.log(isFavourite)
+
+<% const link = '/maps/'+ map.id %>
+
+  <div class="card map-card" style="max-width: 18rem;">
+    <img class="card-img-top" src="https://maps.twomoons.de/styles/klokantech-basic/13/2817/4944.png" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title"><%=map.name%></h5>
+      <p class="card-text">Some information about the map goes here!</p>
+      <a href="<%=link%>" class="badge badge-light">View map</a>
+    </div>
+    <div class="card-footer">
+      <small class="text-muted">Last updated 3 mins ago
+        <div class="map_contributors">
+            <i class="fa fa-users"></i> 17  
+        </div>
+        <div class="map_favourites">
+            <i class="fa fa-heart" data-map-id="<%=map.id%>"></i> 253
+        </div>
+      </small>
+    </div>
+  </div>

@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
 
-    <link rel="stylesheet" href="styles/style.css" type="text/css" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -13,44 +12,25 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">  
     <!-- Internal CSS -->
-    <link rel="stylesheet" href="/styles/main_page.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/favourites.css" type="text/css" />
     
     <!-- External JS -->
     <script type="text/javascript" src="/vendor/jquery-2.2.3.min.js"></script>
-    <!-- internal script --> 
+    <!-- internal Script --> 
     <script type="text/javascript" src="/scripts/map-favourites.js"></script> 
     
 </head>
 
 <body>
-    <%- include('partials/_header', {user_name: user_name}); %>
+  <%- include('partials/_header', {user_name: user_name}); %>
   
   <!-- create map tiles for each map-->
 
    <div class ='card-deck' style='margin:20px'>
 
     <% maps.forEach(function(map){ %>
-      <% link = '/maps/'+ map.id %>
 
-        <div class="card map-card" style="max-width: 18rem;">
-          <img class="card-img-top" src="https://maps.twomoons.de/styles/klokantech-basic/13/2817/4944.png" alt="Card image cap">
-          <div class="card-body">
-            <h5 class="card-title"><%=map.name%></h5>
-            <p class="card-text">Some information about the map goes here!</p>
-            <a href="<%=link%>" class="badge badge-light">View map</a>
-          </div>
-          <div class="card-footer">
-            <small class="text-muted">Last updated 3 mins ago
-              <div class="map_contributors">
-                  <i class="fa fa-users"></i> 17  
-              </div>
-              <div class="map_favourites">
-                  <i class="fa fa-heart" data-map-id="<%=map.id%>"></i> 253
-              </div>
-            </small>
-          </div>
-        </div>
-
+      <%- include('partials/_map_card', {map: map, profile: profile}); %>
 
     <% }) %>
 

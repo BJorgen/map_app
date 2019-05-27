@@ -42,7 +42,18 @@ module.exports = function(DataHelpers) {
       if(err){
         res.status(500).send();
       }else{
-       res.render('main',{maps, user_name : (req.session.user_name ? req.session.user_name :  "")});
+        // res.render('main',{maps, user_name : (req.session.user_name ? req.session.user_name :  "")});
+        if(!req.session.user_id) {
+          res.render('main',{maps, profile : null, user_name : (req.session.user_name ? req.session.user_name :  "")});
+        } else {
+          DataHelpers.getUserProfile(req.session.user_id,function(err, profile){
+            if(err){
+              res.status(500).send();
+            } else{
+            res.render('main',{maps, profile : profile, user_name : (req.session.user_name ? req.session.user_name :  "")});
+            } 
+          });
+        }
       }
     })
   });
@@ -135,9 +146,7 @@ module.exports = function(DataHelpers) {
       if(err){
         res.status(500).send();
       }else{
-        // Need to edit this to send ajax update to page
         res.status(200).json(listOfFavourites);
-        // ------
       }
     });
   }
@@ -148,9 +157,7 @@ module.exports = function(DataHelpers) {
       if(err){
         res.status(500).send();
       }else{
-        // Need to edit this to send ajax update to page
         res.status(200).json(listOfFavourites);
-        // ------
       }
     });
   }

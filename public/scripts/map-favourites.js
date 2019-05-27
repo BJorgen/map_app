@@ -19,7 +19,7 @@ function toggleFavourite(){
       method: 'DELETE',
       success: function(res){
         heart.removeClass('favourite')
-        console.log(res);
+        console.log(res.length);
       },
       error: function(req, textStatus, errorThrown) {
         console.log("error", errorThrown);
@@ -34,7 +34,7 @@ function toggleFavourite(){
       method: 'POST',
       success: function(res){
         heart.addClass('favourite')
-        console.log(res);
+        console.log(res.length);
       },
       error: function(req, textStatus, errorThrown) {
         console.log("error", errorThrown);
@@ -42,9 +42,8 @@ function toggleFavourite(){
       }
     });
   }
-
-
 }
+
 
 $(document).ready(function() {
   $('.map_favourites .fa-heart').on('click', toggleFavourite)
