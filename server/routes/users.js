@@ -10,7 +10,12 @@ module.exports = function(dataHelpers) {
 //==============================================
 
   const getProfile = function (req, res){
-    dataHelpers.getUserProfile(req.params.user,function(err, profile){
+    console.log("yes I am here")
+    if( ! req.session.user_id){
+      res.status(403).send("Wrong credentials");
+      return;
+    }
+    dataHelpers.getUserProfile(req.session.user_id,function(err, profile){
       if(err){
         res.status(500).send();
       }else{
@@ -33,8 +38,10 @@ module.exports = function(dataHelpers) {
 //                 USER ROUTES
 //==============================================
 
-  usersRoutes.get("/:user", getProfile);
+
+  usersRoutes.get("/:user/profile", getProfile);
   usersRoutes.get("/:user/JSON", getProfileJSON);
+  usersRoutes.get("/:user", getProfile);
   return usersRoutes;
 
 };
