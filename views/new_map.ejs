@@ -23,13 +23,49 @@
 </head>
 
 <body>
-    <%- include('partials/_header', {user_name: user_name}); %>
-  
-  <!-- create map tiles for each map-->
+  <%- include('partials/_header', {user_name: user_name}); %>
+  <p id="demo"></p>
+  <form id="new-map" action="/maps/" method="POST" class="w3-modal">
+    <div class="w3-modal-content w3-card-4">
+      <header class="w3-container w3-teal">
+        <h2>Create new map</h2>
+      </header>
+      <label for="name"><b>Name</b></label>
+      <input type="text" placeholder="Map name" name="name" required>
+      <br />
+      <label for="center_long"><b>Longitude</b></label>
+      <input id="center_long" name="center_long"></input>
+      <br />
+      <label for="center_lat"><b>Latitude</b></label>
+      <input id="center_lat" name="center_lat"></input>
+      <br />
+      <footer class="w3-container w3-teal">
+        <button onclick="getLocation()">Add your location</button>
+        <button type="submit" class="btn">Create</button>
+        <output class="error"></output>
+      </footer>
+    </div>
+  </form>
 
-  Hi there
+ 
 
-  </div>
+  <script>
+      const lat = document.getElementById("center_lat");
+      const long = document.getElementById("center_long");
+      
+      function getLocation() {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(showPosition);
+        } else { 
+          x.innerHTML = "Geolocation is not supported by this browser.";
+        }
+      }
+      
+      function showPosition(position) {
+        lat.value =  position.coords.latitude
+        long.value = position.coords.longitude;
+      }
+      </script>
 
 </body>
 </html>
