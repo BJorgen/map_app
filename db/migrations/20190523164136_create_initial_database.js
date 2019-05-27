@@ -10,10 +10,12 @@ exports.up = function(knex, Promise) {
     table.string('password', 255).notNullable()
     table.timestamp('created_at').defaultTo(knex.fn.now())
   })
+
+  //TODO map_settings should reference map and not the other way around
   .createTable('map_settings', function (table) {
     table.increments('id').primary()
-    table.decimal('center_long',9,6)
-    table.decimal('center_lat',9,6)
+    table.decimal('center_long',9,6).notNullable()
+    table.decimal('center_lat',9,6).notNullable()
     table.decimal('zoom')
   })
   .createTable('maps', function (table) {
@@ -31,8 +33,8 @@ exports.up = function(knex, Promise) {
     table.string('title', 255).notNullable()
     table.string('description', 255)
     table.timestamp('created_at').defaultTo(knex.fn.now())
-    table.decimal('longitude',9,6)
-    table.decimal('latitude',9,6)
+    table.decimal('longitude',9,6).notNullable()
+    table.decimal('latitude',9,6).notNullable()
     table.integer('map_id')
     table.foreign('map_id').references('maps.id').onDelete('CASCADE')
   })
