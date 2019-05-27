@@ -37,6 +37,10 @@ const isAuthorized = function(req){
 //==============================================
 module.exports = function(DataHelpers) {
 
+  mapsRoutes.get("/new", function(req, res){
+    res.render('new_map', {user_name : (req.session.user_name ? req.session.user_name :  "")});
+  })
+
   mapsRoutes.get("/", function (req, res){
     DataHelpers.getAllMaps(function(err, maps){
       if(err){
@@ -161,6 +165,8 @@ module.exports = function(DataHelpers) {
       }
     });
   }
+
+
 
   mapsRoutes.post("/:map/favourite", addMapFavourite);
   mapsRoutes.delete("/:map/favourite", deleteMapFavourite);
