@@ -10,11 +10,14 @@
 
     <!-- Font Awesome CSS -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
-    <!-- Bootstrap CSS -->
+    <!-- Bootstrap and W3 CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">  
     <!-- Internal CSS -->
-   <!-- <link rel="stylesheet" href="/styles/main_page.css" type="text/css" /> -->
+    <link rel="stylesheet" href="/styles/favourites.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/style.css" type="text/css" />
     
+
+
     <!-- External JS -->
     <script type="text/javascript" src="/vendor/jquery-2.2.3.min.js"></script>
     <!-- internal script --> 
@@ -25,7 +28,7 @@
 <body>
   <%- include('partials/_header', {user_name: user_name}); %>
   <p id="demo"></p>
-  <form id="new-map" action="/maps/" method="POST" class="w3-modal">
+  <form id="new-map" action="/maps/" method="POST" >
     <div class="w3-modal-content w3-card-4">
       <header class="w3-container w3-teal">
         <h2>Create new map</h2>
@@ -40,7 +43,7 @@
       <input id="center_lat" name="center_lat"></input>
       <br />
       <footer class="w3-container w3-teal">
-        <button onclick="getLocation()">Add your location</button>
+        <button type="button" onclick="getLocation()">Add your location</button>
         <button type="submit" class="btn">Create</button>
         <output class="error"></output>
       </footer>

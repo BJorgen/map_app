@@ -3,9 +3,7 @@
 const express       = require('express');
 const mapsRoutes  = express.Router();
 
-const createMap = function (req, res){
-  res.status(400).send();
-};
+
 
 const deleteImg = function (req, res){
   res.status(400).send();
@@ -180,6 +178,33 @@ module.exports = function(DataHelpers) {
     }
     DataHelpers.updatePointImage(pointdId, url, getSendJSOnonSuccess(res));
   });
+
+  const createMap = function (req, res){
+    const mapData = {
+      map: {
+      name: req.body.name,
+      public: true,
+      user_id: req.session.user_id
+      },
+      settings: {
+        center_long: req.body.center_long,
+        center_lat: req.body.center_lat,
+        zoom: 12
+      }
+    }
+    if(! (mapData.map.name && mapData.settings.center_long && mapData.settings.center_lat)){
+      res.status(400).send("not good enough");
+      return;
+    }
+    DataHelpers.addMap(mapData,function(err, mapInfo){
+      if(err){
+        res.status(500).send("error with the server");
+        return;
+      } else {
+        res.redirect('/maps/' + mapInfo.id)
+      }
+    });
+  };
 
   mapsRoutes.delete("/:map/points/:point/imgs/:img", deleteImg);
   mapsRoutes.post("/", createMap);
