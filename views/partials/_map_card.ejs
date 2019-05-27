@@ -3,9 +3,10 @@
 <% const isContributor =  profile&&profile.contributions.map(a=>a.id).includes(map.id) ? 'contributor' : ''%>
 
 <% const link = '/maps/'+ map.id %>
+<% let url =  (map.urls && map.urls[map.urls.length-1]) ? map.urls[map.urls.length-1] : "https://maps.twomoons.de/styles/klokantech-basic/13/2817/4944.png" %>
 
   <div class="card map-card" style="max-width: 18rem; min-width:18rem; margin-bottom: 20px">
-    <img class="card-img-top" src="https://maps.twomoons.de/styles/klokantech-basic/13/2817/4944.png" alt="Card image cap">
+    <img class="card-img-top" src=<%= url %> alt="Card image cap">
     <div class="card-body">
       <h5 class="card-title"><%=map.name%></h5>
       <p class="card-text">Some information about the map goes here!</p>

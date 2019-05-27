@@ -92,15 +92,19 @@ module.exports = function(knex){
 //                GET ALL MAPS
 //==============================================
 // ---- returns a list of all maps -----
-  function getAllMaps(cb) {
-    knex.select('*').from('maps')
-    .asCallback((err, res) => {
-      if (err) {
-        throw err;
-      }
-      cb(null,res);
-    });
-  }
+function getAllMaps(cb) {
+  //Send an array of urls as well
+  knex.select('maps.*', knex.raw('json_agg(images.image_url) as urls')).from('maps')
+  .leftJoin('points','points.map_id','maps.id')
+  .leftJoin('images','points.id','images.point_id')
+  .groupByRaw('maps.id')
+  .asCallback((err, res) => {
+    if (err) {
+      throw err;
+    }
+    cb(null,res);
+  });
+}
 
 //==============================================
 //             ADD MAP and SETTINGS
