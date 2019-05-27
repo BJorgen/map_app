@@ -10,9 +10,11 @@
 
     <!-- Font Awesome CSS -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
-
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">  
+    <!-- Internal CSS -->
+    <link rel="stylesheet" href="/styles/main_page.css" type="text/css" />
+    
     <!-- External JS -->
     <script type="text/javascript" src="/vendor/jquery-2.2.3.min.js"></script>
     <!-- internal script --> 
@@ -30,7 +32,7 @@
     <% maps.forEach(function(map){ %>
       <% link = '/maps/'+ map.id %>
 
-        <div class="card map-card" data-map-id="<%=map.id%>" style="max-width: 18rem;">
+        <div class="card map-card" style="max-width: 18rem;">
           <img class="card-img-top" src="https://maps.twomoons.de/styles/klokantech-basic/13/2817/4944.png" alt="Card image cap">
           <div class="card-body">
             <h5 class="card-title"><%=map.name%></h5>
@@ -43,7 +45,7 @@
                   <i class="fa fa-users"></i> 17  
               </div>
               <div class="map_favourites">
-                  <i class="fa fa-heart" onclick="toggleFavourite(<%=map.id%>)"></i> 253
+                  <i class="fa fa-heart" data-map-id="<%=map.id%>"></i> 253
               </div>
             </small>
           </div>
