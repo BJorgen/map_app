@@ -31,16 +31,16 @@
 
   <div style='max-width:400px; margin:auto; padding:20px'>
     <form id="new-map" action="/maps/" method="POST" class="form-signin">
-      <h1 class="h3 mb-3 font-weight-normal">Create new map</h1>
-      <label for="name"><h4><b>Name</b></h4></label>
+      <h1 class="h3 mb-3 font-weight-normal">Create Map</h1>
+      <label for="name"><h5><b>Name</b></h5></label>
       <input type="text" class="form-control" placeholder="Map name" name="name" required>
       </br>
-      <label for="name"><h4><b>Location</b></h4></label>
+      <label for="name"><h5><b>Location</b></h5></label>
       <button type="button" class="btn btn-outline-secondary btn-block" onclick="getLocation()" style='margin-bottom:10px;'>Add your location</button>
       <label for="center_long">Longitude:</label>
-      <input id="center_long" class="form-control" name="center_long" required></input>
+      <input id="center_long" class="form-control" name="center_long" required>
       <label for="center_lat">Latitude:</label>
-      <input id="center_lat" class="form-control" name="center_lat" required></input>
+      <input id="center_lat" class="form-control" name="center_lat" required>
       <button type="submit" class="btn btn-lg btn-primary btn-block" style='margin-top:20px;'>Create Map</button>
       <output class="error"></output>
     </form>
