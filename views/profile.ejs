@@ -36,7 +36,7 @@
 
       <% profile.favourites.forEach(function(map){ %>
       
-        <%- include('partials/_map_card', {map: map}); %>
+        <%- include('partials/_map_card', {map: map, isFavourites : true}); %>
 
       <% }) %>
 
@@ -54,7 +54,7 @@
     <div class ='card-deck' style='margin:20px'>
 
       <% profile.contributions.forEach(function(map){ %>
-      <%- include('partials/_map_card', {map: map}); %>
+      <%- include('partials/_map_card', {map: map, isFavourites : false}); %>
 
       <% }) %>
     </div>

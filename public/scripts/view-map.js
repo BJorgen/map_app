@@ -14,8 +14,7 @@ const updatePointContainer = function(point){
   $('#upload-img').show();
 }
 
-const clearPointContainer = function(point){
-  activePoint = point;
+const clearPointContainer = function(){
   $('#point-container .title').text("");
   $('#point-container .description').text("");
   $('#point-container .img').attr("src","");
@@ -74,6 +73,7 @@ const addPoint = function(point) {
   var infowindow = new google.maps.InfoWindow({
     content: `<div><button class="btn-link" onclick=handleFlagClick(${point.id})>${point.title}</button></div>`
   });
+  // TODO find hover listener and show title on hover
  marker.addListener('click', function () {
     infowindow.open(map, marker);
   });
@@ -98,18 +98,17 @@ const {enableNewPointEvent, disableNewPointEvent} = function(){
   let newPointListener = null;
   return {
     enableNewPointEvent : function (){
-        newPointListener = map.addListener('click', newPointEvent);
-        $("#toggleEditBtn").html("Cancel add point");
-        $("#toggleEditBtn").attr("onclick","disableNewPointEvent()")
-        
-      },
-      disableNewPointEvent : function(){
-        google.maps.event.removeListener(newPointListener);
-        newPointListener = null;
-        $("#toggleEditBtn").html("Add New Point");
-        $("#toggleEditBtn").attr("onclick","enableNewPointEvent()")
-      }
-
+      newPointListener = map.addListener('click', newPointEvent);
+      $("#toggleEditBtn").html("Cancel add point");
+      $("#toggleEditBtn").attr("onclick","disableNewPointEvent()")        
+    },
+    
+    disableNewPointEvent : function(){
+      google.maps.event.removeListener(newPointListener);
+      newPointListener = null;
+      $("#toggleEditBtn").html("Add New Point");
+      $("#toggleEditBtn").attr("onclick","enableNewPointEvent()")
+    }
   }
 }();
 
