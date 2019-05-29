@@ -65,7 +65,7 @@ module.exports = function(DataHelpers) {
       if(err){
         res.status(500).send();
       }else if(! map){
-        res.status(404).send();
+        res.status(404).send("Error page not found");
       }else{
         res.render('view_map',{map, user_name : (req.session.user_name ? req.session.user_name :  "") });
       }

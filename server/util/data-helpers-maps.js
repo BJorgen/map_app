@@ -18,6 +18,7 @@ module.exports = function(knex){
 
   function getMap(mapId, cb) {
   let map;
+  // TODO use join -. one query
     knex.select('*').from('maps')
       .where('id', mapId)
       .asCallback(function(err, mapData) {
@@ -25,13 +26,17 @@ module.exports = function(knex){
           throw err;
         }
         map = mapData[0];
-        getMapSettings(map.map_setting_id , function(err, res) {
-          if (err) {
-            throw err;
-          }
-          map.settings = res;
-          cb(null, map)
-        });
+        if(map){
+          getMapSettings(map.map_setting_id , function(err, res) {
+            if (err) {
+              throw err;
+            }
+            map.settings = res;
+            cb(null, map)
+          });
+        }else{
+          cb(null,null);
+        }
       });
   }
 
