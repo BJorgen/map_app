@@ -129,10 +129,10 @@ const cancelAddNewPoint = function(){
 
 // call back function for Google API call
 function initMap() {
-  //TODO try to use HTML data attribute
-  const centerlong = Number($('#centerlong').html());
-  const center_lat = Number($('#centerlat').html());
-  map_id = Number($('#mapid').html());
+  const mapDataSet = $('#map-container').data();
+  const centerlong =  Number(mapDataSet.mapLongitude);
+  const center_lat =  Number(mapDataSet.mapLatitude);
+  map_id = Number(mapDataSet.mapId);
   
   map = new google.maps.Map(document.getElementById('map'), {
     zoom: 12,
