@@ -34,4 +34,8 @@ h2 {
 }
 
 
+/* hide close button in GoogleMaps Marker info bubble */
+.gm-ui-hover-effect {
+  display: none !important;
+}
 

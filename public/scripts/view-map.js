@@ -29,7 +29,7 @@ const openPointEditForm = function(){
   $('#editPointFrom').show();
 }
 
-const handleFlagClick = function(point){
+const showPointInfo = function(point){
   $.ajax(
     {
       url: '/maps/:map/points/'+point,
@@ -71,13 +71,21 @@ const deleteActivePoint = function(){
 const addPoint = function(point) {
   let marker = getGoogleMarker({lng : Number(point.longitude), lat : Number(point.latitude)});
   var infowindow = new google.maps.InfoWindow({
-    content: `<div><button class="btn-link" onclick=handleFlagClick(${point.id})>${point.title}</button></div>`
+    content: `<div>${point.title}</div>`
   });
-  // TODO find hover listener and show title on hover
- marker.addListener('click', function () {
+  // Onclick show point info
+  marker.addListener('click', function () {
+    showPointInfo(point.id);
+  });
+
+  // Show point title on hover
+  marker.addListener('mouseover', function() {
     infowindow.open(map, marker);
   });
-  pointMap[point.id] = marker;
+  marker.addListener('mouseout', function() {
+    infowindow.close();
+  });
+    pointMap[point.id] = marker;
 }
 
 function newPointEvent(event) {
