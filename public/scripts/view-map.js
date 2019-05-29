@@ -155,14 +155,13 @@ function initMap() {
 }
 
 const bindAjaxOnSubmit = function(errorObj){
-  const map_id = Number($('#mapid').html());
   $( "#newPointForm" ).on( "submit", function( event ) {
     event.preventDefault();
     const pointData = {
       title : this.querySelector('input').value,
       description : this.querySelector('textarea').value,
-      longitude : Number($('#centerlong').html()),
-      latitude : Number($('#centerlat').html()),
+      longitude : nonPersistentMarker.position.lng,
+      latitude : nonPersistentMarker.position.lat,
       map_id : map_id
     }
     $.ajax({
