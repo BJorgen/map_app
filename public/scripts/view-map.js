@@ -15,9 +15,17 @@ const updatePointContainer = function(point){
 }
 
 const clearPointContainer = function(){
-  $('#point-container .title').text("");
-  $('#point-container .description').text("");
-  $('#point-container .img').attr("src","");
+  $('#point-container .title').text("Map App");
+  $('#point-container .description').html(
+    `Select a location in the map to get more information about it.
+    <br>
+    If you are logged in:
+    <br/> - You can like the current map
+    <br/> - You can create a new location by clicking the 'Add New Point' button and then selecting a point on a  the map.
+    <br/> - You can edit or delete the selected location`
+  );
+ // src https://unsplash.com/photos/TrhLCn1abMU        
+  $('#point-container .img').attr("src","/imgs/view-map-base.jpg");
   $('#edit-point').hide();
   $('#delete-point').hide();
   $('#upload-img').hide();
@@ -237,4 +245,5 @@ $( document ).ready(function() {
   $('.modify-point').hide();
   $('.popups').hide();
   bindAjaxOnSubmit();
+  clearPointContainer();
 });
