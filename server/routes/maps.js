@@ -61,6 +61,10 @@ module.exports = function(DataHelpers) {
   });
 
   mapsRoutes.get("/:map", function (req, res){
+    if(! Number(req.params.map)){
+      res.status(404).send("Error page not found");
+      return;
+    }
     DataHelpers.getMap(req.params.map, function(err, map){
       if(err){
         res.status(500).send();
