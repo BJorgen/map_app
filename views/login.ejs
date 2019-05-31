@@ -9,7 +9,7 @@
   </head>
 
   <body>
-    <%- include('partials/_header', {user_name: ""}); %>
+    <%- include('partials/_header', {user_name: "", page_name : 'login'}); %>
 
     <div style='max-width:400px; margin:auto; padding:20px'>
       <form class="form-signin" method="POST" action="/sessions">

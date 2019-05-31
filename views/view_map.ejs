@@ -20,7 +20,7 @@
     <title>Main page</title>
 </head>
 <body>
-  <%- include('partials/_header', {user_name: user_name}); %>
+  <%- include('partials/_header', {user_name: user_name, page_name : ''}); %>
   <% const disabled =  user_name ? '' : 'disabled' %>
                                                                                                                                                                            
   <div clas="container" id= "map-container" data-map-id=<%= map.id %> data-map-latitude ="<%= map.settings.center_lat %>" data-map-longitude = <%= map.settings.center_long %>

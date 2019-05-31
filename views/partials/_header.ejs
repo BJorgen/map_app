@@ -5,15 +5,17 @@
     <span class='navbar-toggler-icon'></span>
   </button>
 <% const linkClass =  user_name ? '' : 'disabled' %>
+
+<% const activeClasses = ['browse', 'profile', 'create map'].map(a => a === page_name ? ' active' : '') %>
   <div class='collapse navbar-collapse' id='navbarSupportedContent'>
     <ul class='navbar-nav mr-auto'>
-      <li class='nav-item active'>
+      <li class= '<%= 'nav-item' + activeClasses[0] %>' >
         <a class='nav-link' href='/maps'> browse </span></a>
       </li>
-      <li class='nav-item'>
+      <li class= '<%= 'nav-item' +  activeClasses[1] %>' >
         <a class= 'nav-link <%= linkClass %>' href='/users/<%= user_name %>'>profile</a></span>
       </li>
-      <li class='nav-item'>
+      <li class= '<%= 'nav-item' +  activeClasses[2] %>' >
         <a class='nav-link <%= linkClass %>' href='/maps/new'>create map</a>
       </li>
     </ul>
