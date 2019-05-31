@@ -4,11 +4,16 @@ const PORT          = 8080;
 const express       = require("express");
 const bodyParser    = require("body-parser");
 const cookieSession = require('cookie-session');
-const morgan        = require("morgan");
 const app           = express();
+require('dotenv').config();
+
+if ( process.env.NODE_ENV === 'development'){
+  const morgan        = require("morgan");
+  app.use(morgan('dev'));
+  console.log('in dev mode');
+}
 
 app.set("view engine", "ejs");
-app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 app.use(cookieSession({
@@ -24,9 +29,9 @@ app.use("/sessions", sessionsRoutes);
 app.use("/maps", mapsRoutes);
 app.use("/users", usersRoutes);
 
-const server = app.listen(PORT, () => {
+const server = app.listen(process.env.PORT || PORT, () => {
 
-  console.log("Example app listening on port " + PORT);
+  console.log("Example app listening on port " + (process.env.PORT || PORT));
 
 });
 
