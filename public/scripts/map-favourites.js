@@ -16,12 +16,15 @@ function toggleFavourite(){
   const addClass = a => heart.addClass('favourite'); 
   // AJAX call can be POST or DELETE depending on current state (liked or not)
   const method = isFavourite ? "DELETE" : "POST";
-  const onSuccess = isFavourite ? removeClass : addClass;
+  const action = isFavourite ? removeClass : addClass;
   // sending AJAX
   $.ajax({
     url : '/maps/' + mapId + '/favourite',
     method: method,
-    success: onSuccess,
+    success: function(likeArr){
+      action();
+      heart.text(" " + likeArr.length);
+    },
     error: function(req, textStatus, errorThrown) {
       console.log("error", errorThrown);
       alert("you have left the happy path")

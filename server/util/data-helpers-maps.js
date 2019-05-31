@@ -289,22 +289,6 @@ function getAllMaps(cb) {
 //             GET USER PROFILE
 //==============================================
 
-function getAllMaps(cb) {
-  //Send an array of urls as well
-  knex.select('maps.*', knex.raw('json_agg(images.image_url) as urls')).from('maps')
-  .leftJoin('points','points.map_id','maps.id')
-  .leftJoin('images','points.id','images.point_id')
-  .groupByRaw('maps.id')
-  .asCallback((err, res) => {
-    if (err) {
-      throw err;
-    }
-    cb(null,res);
-  });
-}
-
-
-
 // ---- responds with array of user favourite maps (map_id) -----
   function getUserFavourites (userId, cb) {
     knex.select({ id: 'favourites.map_id'} ,{name: 'maps.name'}, knex.raw('json_agg(images.image_url) as urls'))
