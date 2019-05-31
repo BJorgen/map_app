@@ -4,7 +4,7 @@
 
 <% const link = '/maps/'+ map.id %>
 <%  var urls = map.urls ? map.urls.filter(Boolean) : null %>
-<% let url =  (urls) ? urls[0] : "https://maps.twomoons.de/styles/klokantech-basic/13/2817/4944.png" %>
+<% let url =  (urls && urls.length) ? urls[0] : "https://maps.twomoons.de/styles/klokantech-basic/13/2817/4944.png" %>
 <% let _id = (isFavourites ? 'f_map_' : '') + map.id%>
   <div id='<%=_id%>' class="card map-card" style="max-width: 18rem; min-width:18rem; margin-bottom: 20px">
     <img class="card-img-top" src=<%= url %> alt="Card image cap">
